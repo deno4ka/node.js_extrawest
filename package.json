@@ -1,0 +1,21 @@
+{
+  "name": "node_js_extrawest_courses",
+  "version": "1.0.0",
+  "description": "learning",
+  "main": "index.js",
+  "scripts": {
+    "build": "gulp",
+    "test": "jasmine"
+  },
+  "author": "deno4ka",
+  "license": "ISC",
+  "devDependencies": {
+    "del": "^4.0.0",
+    "gulp": "^4.0.0",
+    "gulp-jasmine": "^4.0.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-tslint": "^8.1.4",
+    "gulp-typescript": "^5.0.1",
+    "typescript": "^3.3.4000"
+  }
+}
