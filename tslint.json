@@ -19,5 +19,10 @@
     "max-line-length": {
       "options": [120]
     }
-  }
+  },
+  "linterOptions": {
+  "exclude": [
+    "src/lessons/**"
+  ]
+}
 }

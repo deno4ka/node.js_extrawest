@@ -23,7 +23,8 @@ gulp.task('compile', function () {
     return gulp.src('src/**/*.ts')
         .pipe(ts({
             noImplicitAny: true,
-            outFile: 'output.js'
+            outFile: 'output.js',
+            module: 'system'
         }))
         .pipe(gulp.dest('built/local'));
 });
@@ -31,3 +32,6 @@ gulp.task('compile', function () {
 gulp.task('all', gulp.series(['del', 'tslint', 'compile']));
 
 gulp.task('default', gulp.series(['all']));
+// gulp.task('default', mock => { // empty task
+//     mock();
+// });
