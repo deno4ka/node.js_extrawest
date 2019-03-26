@@ -1,13 +1,14 @@
 {
-  "compileOnSave": true,
+//  "compileOnSave": true,
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "removeComments": true,
-    "outDir": "js",
+    "outDir": "built",
     "sourceMap": true,
-    "outFile": "main.js"
+    "outFile": "output.js",
+    "module": "commonjs"
   },
   "files":[
-    "firstFunction.ts"
+    "src/controller/firstFunction.ts"
   ]
 }

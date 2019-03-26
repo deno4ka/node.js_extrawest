@@ -4,18 +4,22 @@
   "description": "learning",
   "main": "index.js",
   "scripts": {
-    "build": "gulp",
+    "build": "gulp all",
     "test": "jasmine"
   },
   "author": "deno4ka",
   "license": "ISC",
   "devDependencies": {
-    "del": "^4.0.0",
-    "gulp": "^4.0.0",
-    "gulp-jasmine": "^4.0.0",
-    "gulp-sourcemaps": "^2.6.5",
-    "gulp-tslint": "^8.1.4",
-    "gulp-typescript": "^5.0.1",
-    "typescript": "^3.3.4000"
+    "del": "latest",
+    "gulp": "latest",
+    "gulp-jasmine": "latest",
+    "gulp-sourcemaps": "latest",
+    "gulp-tslint": "latest",
+    "gulp-typescript": "latest",
+    "tslint": "latest",
+    "typescript": "latest"
+  },
+  "dependencies": {
+    "package.json": "^2.0.1"
   }
 }
