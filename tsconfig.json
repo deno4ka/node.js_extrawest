@@ -2,13 +2,16 @@
 //  "compileOnSave": true,
   "compilerOptions": {
     "target": "es6",
+    "noImplicitAny": true,
+    "preserveConstEnums": true,
     "removeComments": true,
     "outDir": "built",
-    "sourceMap": true,
-    "outFile": "output.js",
-    "module": "commonjs"
+    "sourceMap": true
+    ,"outFile": "output.js"
+    ,"module": "commonjs"
   },
   "files":[
-    "src/controller/firstFunction.ts"
+    "src/**/*.ts",
+    "spec/**/*.ts"
   ]
 }
