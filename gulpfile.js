@@ -9,7 +9,6 @@ const babel = require('gulp-babel');
 const ts = require('gulp-typescript');
 const jasmine = require('gulp-jasmine');
 
-
 gulp.task('del', () => {
     return (async () => {
         await del(['built/**']);

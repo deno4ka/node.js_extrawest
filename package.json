@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "gulp",
-    "test": "jasmine"
+    "test": "nyc jasmine JASMINE_CONFIG_PATH=jasmine.json"
   },
   "author": "deno4ka",
   "license": "ISC",
@@ -26,5 +26,11 @@
   },
   "dependencies": {
     "package.json": "latest"
+  },
+  "nyc": {
+    "exclude": [
+      "**/*.ts",
+      "**/*[sS]pec.js"
+    ]
   }
 }
