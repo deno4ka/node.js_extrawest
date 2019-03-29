@@ -1,3 +1,3 @@
-export default function (a: number, b: number): number {
+export default function firstFunction(a: number, b: number): number {
     return a + b;
 }
