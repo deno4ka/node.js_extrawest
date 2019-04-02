@@ -1,5 +1,5 @@
-let http = require('http');
-let utils = require('util');
+const http = require('http');
+const utils = require('util');
 
 http.createServer((req, res) => {
     let requestInfo = utils.format('HTTPVersion: %s \nMethod: %s \nStatus: %s \nMessage: %s \nURL: %s',

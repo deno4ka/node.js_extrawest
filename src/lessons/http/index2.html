@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Just a page</title>
+    <script>
+        window.onload = () => {
+            let btn = document.getElementById('btn');
+            let container = document.getElementById('output');
+            function makeRequest(data) {
+                let xhr = new XMLHttpRequest();
+                xhr.open('POST', 'data');
+                xhr.onload = (resp) => {
+                    let responseText = JSON.parse(resp.currentTarget.responseText);
+                    for (let i = 0; i < responseText.length; i++) {
+                        console.log(responseText[i]);
+                        container.innerHTML += `Product: ${responseText[i].name} - ${responseText[i].price}$ <br/>`;
+                    }
+                };
+                xhr.onerror = () => {
+                    console.log('error!');
+                };
+                xhr.send(data);
+            }
+            btn.addEventListener('click', () => {
+                let data = '<h3>This is some data!</h3>';
+                makeRequest(data);
+            });
+        }
+    </script>
+</head>
+<body>
+<button class="btn btn-lg btn-success" id="btn">Get Data!!!</button>
+<div id="output"></div>
+</body>
+</html>

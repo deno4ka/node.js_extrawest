@@ -1,8 +1,8 @@
-let http = require('http');
+const http = require('http');
 
 http.createServer((req, res) => {
     console.log(req.rawHeaders);
-    res.setHeader('Content-Type', 'text/plain');
+    res.setHeader('Content-Type', 'text/html');
     let ct = res.getHeader('Content-Type');
     console.log(ct);
     res.sendDate = false;
