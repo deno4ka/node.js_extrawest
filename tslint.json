@@ -10,10 +10,11 @@
     "no-bitwise": true,
     "no-conditional-assignment": true,
     "no-consecutive-blank-lines": false,
-    "no-console": {
-      "severity": "warning",
-      "options": ["debug", "info", "log", "time", "timeEnd", "trace"]
-    },
+    "no-console": [false, "log", "error"],
+//    "no-console": {
+//      "severity": "warning",
+//      "options": ["debug", "info", "log", "time", "timeEnd", "trace"]
+//    },
     "quotemark": [true, "single"],
     "trailing-comma": [false]
   },
