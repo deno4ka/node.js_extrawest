@@ -54,7 +54,7 @@ const utils = require('util');
 //     });
 // });
 
-// fs.readdir('../lessons', function (err, fileNames) {
+// fs.readdir('../itvdn_lessons', function (err, fileNames) {
 //     console.log(fileNames);
 // });
 

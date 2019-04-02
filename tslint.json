@@ -13,7 +13,9 @@
     "no-console": {
       "severity": "warning",
       "options": ["debug", "info", "log", "time", "timeEnd", "trace"]
-    }
+    },
+    "quotemark": [true, "single"],
+    "trailing-comma": [false]
   },
   "jsRules": {
     "max-line-length": {
@@ -22,7 +24,7 @@
   },
   "linterOptions": {
   "exclude": [
-    "src/lessons/**"
+    "src/itvdn_lessons/**"
   ]
 }
 }

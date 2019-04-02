@@ -16,7 +16,7 @@ gulp.task('del', () => {
 });
 
 gulp.task('tslint', () => {
-    return gulp.src('src/**', '!src/lessons/**')
+    return gulp.src('src/**', '!src/itvdn_lessons/**')
         .pipe(tslint({
             formatter: 'verbose'
         }))
