@@ -7,6 +7,7 @@ describe('arrayUnitTests', () => {
     const VOVA = new Person(41, 'Volodymyr', 'Zelensky', Gender.MAN);
     const PETR = new Person(53, 'Petro', 'Poroshenko', Gender.MAN);
     const YULIA = new Person(58, 'Yulia', 'Tymoshenko', Gender.WOMAN);
+    // TODO: VOVA:Person
 
     beforeEach(() => {
         arrToTest = new Array<Person>();
@@ -17,7 +18,7 @@ describe('arrayUnitTests', () => {
 
     it('should check length', () => {
         expect(arrToTest.length).toBe(3);
-        // expect('abc').toHaveLength(3); // WHY NOT?
+        // expect(() => 'abc').(3); // WHY NOT?
         // expect(arrToTest).toHaveLength(3); // WHY NOT??
     });
 
@@ -128,23 +129,16 @@ describe('arrayUnitTests', () => {
         // expect(personAges).toBeInstanceOf(Array); // doesn't work!!!
     });
 
-    // doesn't work!!!
-    // it('should check findIndex', () => {
-    //     const index = arrToTest.findIndex((el) => {
-    //         return el.name === VOVA.name;
-    //     }, VOVA);
-    //     expect(index).toBeGreaterThan(-1);
-    // });
+    it('should check findIndex', () => {
+        const index = arrToTest.findIndex((el) => el.name === VOVA.name, VOVA);
+        expect(index).toBeGreaterThan(-1);
+    });
 
-    // it('should check find', () => {
-    //     const person = arrToTest.find((el) => {
-    //         return el.name === VOVA.name;
-    //     }, VOVA);
-    //     expect(person).not.toBeUndefined();
-    // });
-
-    // it('should check ...', () => {
-    //
-    // });
+    it('should check find', () => {
+        const person = arrToTest.find((el) => {
+            return el.name === VOVA.name;
+        }, VOVA);
+        expect(person).not.toBeUndefined();
+    });
 
 });

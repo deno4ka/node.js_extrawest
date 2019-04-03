@@ -22,7 +22,7 @@
     "nyc": "latest",
     "tslint": "latest",
     "typescript": "latest",
-    "@types/jest": "latest"
+    "@types/jasmine": "latest"
   },
   "dependencies": {
     "@types/node": "latest",
