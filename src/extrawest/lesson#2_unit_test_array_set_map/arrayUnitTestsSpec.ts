@@ -9,14 +9,14 @@ describe('arrayUnitTests', () => {
     const YULIA = new Person(58, 'Yulia', 'Tymoshenko', Gender.WOMAN);
 
     beforeEach(() => {
-        arrToTest = Array<Person>();
+        arrToTest = new Array<Person>();
         arrToTest.push(VOVA);
         arrToTest.push(YULIA);
         arrToTest.push(PETR);
     });
 
     it('should check length', () => {
-        expect(3).toBe(arrToTest.length);
+        expect(arrToTest.length).toBe(3);
         // expect('abc').toHaveLength(3); // WHY NOT?
         // expect(arrToTest).toHaveLength(3); // WHY NOT??
     });
@@ -50,13 +50,13 @@ describe('arrayUnitTests', () => {
     });
 
     it('should check join to string', () => {
-        expect('Volodymyr Zelensky 41 (male) & Yulia Tymoshenko 58 (female) & Petro Poroshenko 53 (male)')
-            .toBe(arrToTest.join(' & '));
+        expect(arrToTest.join(' & '))
+            .toBe('Volodymyr Zelensky 41 (male) & Yulia Tymoshenko 58 (female) & Petro Poroshenko 53 (male)');
     });
 
     it('should check reverse to string', () => {
-        expect('Petro Poroshenko 53 (male) & Yulia Tymoshenko 58 (female) & Volodymyr Zelensky 41 (male)')
-            .toBe(arrToTest.reverse().join(' & '));
+        expect(arrToTest.reverse().join(' & '))
+            .toBe('Petro Poroshenko 53 (male) & Yulia Tymoshenko 58 (female) & Volodymyr Zelensky 41 (male)');
     });
 
     it('should check filter man only', () => {
@@ -76,7 +76,7 @@ describe('arrayUnitTests', () => {
             if (p1.surname < p2.surname) { return -1; }
             return 0;
         });
-        expect(expectedArr).toEqual(arrToTest);
+        expect(arrToTest).toEqual(expectedArr);
     });
 
     it('should check includes for true', () => {
