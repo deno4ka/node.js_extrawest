@@ -1,12 +1,12 @@
-import Person from './person';
+import Person, {Gender} from './person';
 
 describe('arrayUnitTests', () => {
 
     let arrToTest: Person[];
 
-    const VOVA = new Person(41, 'Volodymyr', 'Zelensky');
-    const PETR = new Person(53, 'Petro', 'Poroshenko');
-    const YULIA = new Person(58, 'Yulia', 'Tymoshenko');
+    const VOVA = new Person(41, 'Volodymyr', 'Zelensky', Gender.MAN);
+    const PETR = new Person(53, 'Petro', 'Poroshenko', Gender.MAN);
+    const YULIA = new Person(58, 'Yulia', 'Tymoshenko', Gender.WOMAN);
 
     beforeEach(() => {
         arrToTest = Array<Person>();
@@ -23,7 +23,7 @@ describe('arrayUnitTests', () => {
 
     it('should check push', () => {
         arrToTest.push(null);
-        expect(arrToTest.length).toBe(4);
+        expect(arrToTest.length).toBeGreaterThan(3);
     });
 
     it('should check pop', () => {
@@ -49,8 +49,32 @@ describe('arrayUnitTests', () => {
         }));
     });
 
-    it('should check join', () => {
-        expect('Volodymyr Zelensky 41, Yulia Tymoshenko 58, Petro Poroshenko 53').toBe(arrToTest.join(', '));
+    it('should check join to string', () => {
+        expect('Volodymyr Zelensky 41 (male) & Yulia Tymoshenko 58 (female) & Petro Poroshenko 53 (male)')
+            .toBe(arrToTest.join(' & '));
+    });
+
+    it('should check reverse to string', () => {
+        expect('Petro Poroshenko 53 (male) & Yulia Tymoshenko 58 (female) & Volodymyr Zelensky 41 (male)')
+            .toBe(arrToTest.reverse().join(' & '));
+    });
+
+    it('should check filter man only', () => {
+        const expectedArray = arrToTest.filter((el) => {
+            return el.gender === Gender.MAN;
+        }, arrToTest);
+        expect(expectedArray.length).toBeGreaterThanOrEqual(2);
+    });
+
+    it('should check sort by surname asc', () => {
+        const expectedArr = new Array<Person>();
+        expectedArr.push(PETR);
+        expectedArr.push(YULIA);
+        expectedArr.push(VOVA);
+        const actualArr = arrToTest.sort((p1, p2) => {
+            return p1.surname > p2.surname;
+        });
+        expect(expectedArr.length).toBe(actualArr);
     });
 
     // it('should check findIndex', () => {
@@ -58,6 +82,13 @@ describe('arrayUnitTests', () => {
     //         return el.name === VOVA.name;
     //     }, VOVA);
     //     expect(index).toBeGreaterThan(-1);
+    // });
+
+    // it('should check find', () => {
+    //     const person = arrToTest.find((el) => {
+    //         return el.name === VOVA.name;
+    //     }, VOVA);
+    //     expect(person).not.toBeUndefined();
     // });
 
     // it('should check ...', () => {

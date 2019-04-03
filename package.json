@@ -25,6 +25,7 @@
     "@types/jest": "latest"
   },
   "dependencies": {
+    "@types/node": "^11.13.0",
     "package.json": "latest"
   },
   "nyc": {
