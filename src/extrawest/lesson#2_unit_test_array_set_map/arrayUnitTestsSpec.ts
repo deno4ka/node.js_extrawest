@@ -60,10 +60,10 @@ describe('arrayUnitTests', () => {
     });
 
     it('should check filter man only', () => {
-        const expectedArray = arrToTest.filter((el) => {
+        const filteredArr = arrToTest.filter((el) => {
             return el.gender === Gender.MAN;
-        }, arrToTest);
-        expect(expectedArray.length).toBeGreaterThanOrEqual(2);
+        });
+        expect(filteredArr.length).toBeGreaterThanOrEqual(2);
     });
 
     it('should check sort by surname asc', () => {
@@ -71,12 +71,64 @@ describe('arrayUnitTests', () => {
         expectedArr.push(PETR);
         expectedArr.push(YULIA);
         expectedArr.push(VOVA);
-        const actualArr = arrToTest.sort((p1, p2) => {
-            return p1.surname > p2.surname;
+        arrToTest.sort((p1, p2) => {
+            if (p1.surname > p2.surname) { return 1; }
+            if (p1.surname < p2.surname) { return -1; }
+            return 0;
         });
-        expect(expectedArr.length).toBe(actualArr);
+        expect(expectedArr).toEqual(arrToTest);
     });
 
+    it('should check includes for true', () => {
+        expect(arrToTest.includes(VOVA)).not.toBeFalsy();
+    });
+
+    it('should check indexOf element', () => {
+        arrToTest.push(VOVA);
+        arrToTest.push(PETR);
+        expect(arrToTest.indexOf(VOVA)).not.toBeLessThan(0);
+        expect(arrToTest.indexOf(YULIA)).toEqual(1);
+        expect(arrToTest.indexOf(PETR)).not.toBeGreaterThan(2);
+    });
+
+    it('should check indexOf element', () => {
+        arrToTest.push(VOVA);
+        arrToTest.push(PETR);
+        expect(arrToTest.lastIndexOf(VOVA)).toBe(3);
+        expect(arrToTest.lastIndexOf(YULIA) === 1).not.toBeFalsy();
+        expect(arrToTest.lastIndexOf(PETR) === 4).toBeTruthy();
+    });
+
+    it('should check forEach', () => {
+        // change gender :)
+        arrToTest.forEach((el) => {
+            el.gender === Gender.MAN ? el.gender = Gender.WOMAN : el.gender = Gender.MAN;
+        });
+        let filteredArray = arrToTest.filter((el) => {
+            return el.gender === Gender.MAN;
+        });
+        expect(filteredArray.length).toEqual(1);
+
+        // rollback changes :)
+        arrToTest.forEach((el) => {
+            el.gender === Gender.MAN ? el.gender = Gender.WOMAN : el.gender = Gender.MAN;
+        });
+        filteredArray = arrToTest.filter((el) => {
+            return el.gender === Gender.MAN;
+        });
+        expect(filteredArray.length).toEqual(2);
+    });
+
+    it('should check map', () => {
+        const personAges = arrToTest.map((el) => {
+            return el.age;
+        });
+        expect(personAges).toBeDefined();
+        expect(personAges.length).toBe(3);
+        // expect(personAges).toBeInstanceOf(Array); // doesn't work!!!
+    });
+
+    // doesn't work!!!
     // it('should check findIndex', () => {
     //     const index = arrToTest.findIndex((el) => {
     //         return el.name === VOVA.name;
