@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "gulp",
-    "test": "nyc jasmine JASMINE_CONFIG_PATH=jasmine.json"
+    "test": "nyc --exclude-after-remap=false gulp jasmine"
   },
   "author": "deno4ka",
   "license": "ISC",
@@ -29,9 +29,13 @@
     "package.json": "latest"
   },
   "nyc": {
+    "check-coverage": true,
+    "per-file": true,
+    "include": [
+      "built/**/*.js"
+    ],
     "exclude": [
-      "**/*.ts",
-      "**/*[sS]pec.js"
+      "built/**/*[sS]pec.js"
     ]
   }
 }

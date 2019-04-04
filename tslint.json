@@ -19,11 +19,12 @@
     "quotemark": [true, "single"],
     "trailing-comma": [false]
   },
-  "jsRules": {
-    "max-line-length": {
-      "options": [120]
-    }
-  },
+  "jsRules": true,
+//  "jsRules": {
+//    "max-line-length": {
+//      "options": [120]
+//    }
+//  },
   "linterOptions": {
   "exclude": [
     "src/itvdn_lessons/**"

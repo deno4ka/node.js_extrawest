@@ -1,16 +1,30 @@
 {
-//  "compileOnSave": true,
   "compilerOptions": {
-    "target": "es2018",
-    "noImplicitAny": true,
-    "preserveConstEnums": true,
-    "removeComments": true,
-    "outDir": "built",
-    "sourceMap": true
-    ,"outFile": "output.js"
-    ,"module": "commonjs"
-  },
-  "files":[
-    "src/**/*.ts"
-  ]
+    "allowJs": false,
+    "declaration": true,
+    "module": "es6",
+    "target": "es2017",
+    "lib": [
+      "es2017"
+    ],
+    "moduleResolution": "node",
+    "rootDir": ".",
+    "sourceMap": true,
+    "alwaysStrict": false,
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "noUnusedLocals": false,
+    "strictNullChecks": false,
+    "strictFunctionTypes": false,
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+    "skipLibCheck": true,
+    "removeComments": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "listFiles": true,
+    "pretty": true
+  }
 }

@@ -1,32 +1,29 @@
 {
-  "description": "These are just examples for demonstration, nothing prescriptive",
-  "nyc": {
-    "check-coverage": true,
-    "per-file": true,
-    "lines": 99,
-    "statements": 99,
-    "functions": 99,
-    "branches": 99,
-    "include": [
-      "src/**/*.js"
-    ],
-    "exclude": [
-      "src/**/*.spec.js"
-    ],
-    "ignore-class-method": "methodToIgnore",
-    "reporter": [
-      "lcov",
-      "text-summary"
-    ],
-    "require": [
-      "./test/helpers/some-helper.js"
-    ],
-    "extension": [
-      ".jsx"
-    ],
-    "cache": true,
-    "all": true,
-    "temp-dir": "./alternative-tmp",
-    "report-dir": "./alternative"
-  }
+  "all": true,
+  "cache": false,
+  "check-coverage": true,
+  "statements": 91,
+  "branches": 86,
+  "functions": 94,
+  "lines": 92,
+  "es-module": true,
+  "extension": [
+
+  ],
+  "include": [
+    "**/built/**/**.js"
+  ],
+  "exclude": [
+     "**/*.spec.*"
+  ],
+  "require": [
+  ],
+  "sourceMap": true,
+  "instrument": true,
+  "reporter": [
+    "html",
+    "text",
+    "text-summary"
+  ],
+  "report-dir": "./dist/coverage"
 }

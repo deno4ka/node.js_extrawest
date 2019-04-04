@@ -1,4 +1,4 @@
-// require("@babel/register");
+// require('@babel/register');
 
 const gulp = require('gulp');
 const del = require('del');
@@ -26,22 +26,31 @@ gulp.task('tslint', () => {
 gulp.task('compile', () => {
     return gulp.src('src/**/*.ts')
         .pipe(sourcemaps.init())
-        .pipe(ts({
-            noImplicitAny: true,
-            // outFile: 'output.js',
-            // module: 'system'
-        }))
+        .pipe(ts.createProject('tsconfig.json')())
         // ?? why we need babel ??
         .pipe(babel({
-            presets: ['@babel/env']
+            ignore: [
+                '**/*.d.ts'
+            ],
+            'presets': [
+                [
+                    '@babel/env',
+                    {
+                        'targets': {
+                            'node': 'current'
+                        }
+                    }
+                ]
+            ],
+            sourceMap: 'both'
         }))
-        .pipe(sourcemaps.write('../maps'))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('built/local'));
 });
 
 gulp.task('jasmine', () => {
     return gulp.src('built/**/*[sS]pec.js')
-        .pipe(jasmine())
+        .pipe(jasmine());
 });
 
 // gulp.task('all', gulp.series(['del', 'tslint', 'compile', 'jasmine']));

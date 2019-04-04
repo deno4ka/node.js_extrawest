@@ -1,4 +1,4 @@
-import firstFunction from './firstFunction';
+import {firstFunction} from './firstFunction';
 
 describe('Test 1 + 1 = 2', () => {
     it('contains spec with an expectation', () => {

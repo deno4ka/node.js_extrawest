@@ -1,4 +1,4 @@
-import utils = require('util');
+import * as utils from 'util';
 
 export default class Person {
 
