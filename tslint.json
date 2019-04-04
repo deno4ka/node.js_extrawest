@@ -2,6 +2,7 @@
   "extends": "tslint:recommended",
 //  "rulesDirectory": ["path/to/custom/rules/directory/", "another/path/"],
   "rules": {
+    "typedef": [true, "variable-declaration"],
     "max-line-length": {
       "options": [120]
     },

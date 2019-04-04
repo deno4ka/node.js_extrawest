@@ -4,9 +4,9 @@ describe('mapUnitTests', () => {
 
     let mapToTest: Map<string, Person>;
 
-    const VOVA = new Person(41, 'Volodymyr', 'Zelensky', Gender.MAN);
-    const PETR = new Person(53, 'Petro', 'Poroshenko', Gender.MAN);
-    const YULIA = new Person(58, 'Yulia', 'Tymoshenko', Gender.WOMAN);
+    const VOVA: Person = new Person(41, 'Volodymyr', 'Zelensky', Gender.MAN);
+    const PETR: Person = new Person(53, 'Petro', 'Poroshenko', Gender.MAN);
+    const YULIA: Person = new Person(58, 'Yulia', 'Tymoshenko', Gender.WOMAN);
 
     beforeEach(() => {
         mapToTest = new Map<string, Person>();

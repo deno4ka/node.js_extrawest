@@ -4,10 +4,9 @@ describe('arrayUnitTests', () => {
 
     let arrToTest: Person[];
 
-    const VOVA = new Person(41, 'Volodymyr', 'Zelensky', Gender.MAN);
-    const PETR = new Person(53, 'Petro', 'Poroshenko', Gender.MAN);
-    const YULIA = new Person(58, 'Yulia', 'Tymoshenko', Gender.WOMAN);
-    // TODO: VOVA:Person
+    const VOVA: Person = new Person(41, 'Volodymyr', 'Zelensky', Gender.MAN);
+    const PETR: Person = new Person(53, 'Petro', 'Poroshenko', Gender.MAN);
+    const YULIA: Person = new Person(58, 'Yulia', 'Tymoshenko', Gender.WOMAN);
 
     beforeEach(() => {
         arrToTest = new Array<Person>();
@@ -61,14 +60,14 @@ describe('arrayUnitTests', () => {
     });
 
     it('should check filter man only', () => {
-        const filteredArr = arrToTest.filter((el) => {
+        const filteredArr: Person[] = arrToTest.filter((el) => {
             return el.gender === Gender.MAN;
         });
         expect(filteredArr.length).toBeGreaterThanOrEqual(2);
     });
 
     it('should check sort by surname asc', () => {
-        const expectedArr = new Array<Person>();
+        const expectedArr: Person[] = new Array<Person>();
         expectedArr.push(PETR);
         expectedArr.push(YULIA);
         expectedArr.push(VOVA);
@@ -105,7 +104,7 @@ describe('arrayUnitTests', () => {
         arrToTest.forEach((el) => {
             el.gender === Gender.MAN ? el.gender = Gender.WOMAN : el.gender = Gender.MAN;
         });
-        let filteredArray = arrToTest.filter((el) => {
+        let filteredArray: Person[] = arrToTest.filter((el) => {
             return el.gender === Gender.MAN;
         });
         expect(filteredArray.length).toEqual(1);
@@ -121,7 +120,7 @@ describe('arrayUnitTests', () => {
     });
 
     it('should check map', () => {
-        const personAges = arrToTest.map((el) => {
+        const personAges: number[] = arrToTest.map((el) => {
             return el.age;
         });
         expect(personAges).toBeDefined();
@@ -130,12 +129,12 @@ describe('arrayUnitTests', () => {
     });
 
     it('should check findIndex', () => {
-        const index = arrToTest.findIndex((el) => el.name === VOVA.name, VOVA);
+        const index: number = arrToTest.findIndex((el) => el.name === VOVA.name, VOVA);
         expect(index).toBeGreaterThan(-1);
     });
 
     it('should check find', () => {
-        const person = arrToTest.find((el) => {
+        const person: Person = arrToTest.find((el) => {
             return el.name === VOVA.name;
         }, VOVA);
         expect(person).not.toBeUndefined();
