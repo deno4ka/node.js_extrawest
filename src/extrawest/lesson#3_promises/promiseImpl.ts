@@ -22,10 +22,10 @@ export default class PromiseImpl implements IPromise {
         });
     }
 
-    // public getRandomNumberWithoutPromise = (min: number, max: number, callback: (err, data) => {}): number => {
-    public getRandomNumberWithoutPromise = (min: number, max: number): number => {
-        // return callback(null, Math.random() * (max - min) + min);
-        return Math.random() * (max - min) + min;
+    public getRandomNumberWithoutPromise = (min: number, max: number, callback): void => {
+        setTimeout( () => {
+            callback(null, Math.random() * (max - min) + min);
+        }, 3000);
     }
 
 }

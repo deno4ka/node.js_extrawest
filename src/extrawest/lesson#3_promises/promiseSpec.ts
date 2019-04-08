@@ -85,12 +85,10 @@ describe('promise', () => {
     });
 
     it('should check promisified method', (done) => {
-        console.log('should check promisified method');
-        const getRandomNumberPromisified: (arg1: number, arg2: number) => Promise<any> =
+        const getRandomNumberPromisified: (arg1: number, arg2: number) => Promise<number> =
             promisify(promiseImpl.getRandomNumberWithoutPromise);
-        console.log('before');
         getRandomNumberPromisified(MIN, MAX).then((res) => {
-            console.log(res);
+            // console.log(res);
             expect(res).toBeDefined();
             expect(res).toBeGreaterThanOrEqual(MIN);
             expect(res).toBeLessThanOrEqual(MAX);
@@ -100,7 +98,6 @@ describe('promise', () => {
             fail(err);
             done();
         });
-        console.log('after');
     });
     // END OF POSITIVE CASES
 

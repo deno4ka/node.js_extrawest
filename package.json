@@ -1,6 +1,6 @@
 {
   "name": "node_js_extrawest_courses",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "learning",
   "main": "index.js",
   "scripts": {
@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@types/node": "latest",
+    "express": "latest",
     "package.json": "latest"
   },
   "nyc": {
