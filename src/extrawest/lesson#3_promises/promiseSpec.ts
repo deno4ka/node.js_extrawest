@@ -28,6 +28,7 @@ describe('promise', () => {
         });
     });
 
+    // before refactoring version
     xit('should getRandomNumber by three serial promises from 3 to 30', (done) => {
         let sum: number = 0;
         const promiseFirst: Promise<number> = promiseImpl.getRandomNumber(MIN, MAX);
@@ -62,6 +63,61 @@ describe('promise', () => {
         });
     });
 
+    // after refactoring version 1
+    xit('should getRandomNumber by three serial promises from 3 to 30', (done) => {
+        let sum: number = 0;
+        promiseImpl.getRandomNumber(MIN, MAX)
+            .then( (resFirst) => {
+            expect(resFirst).toBeDefined();
+            sum += resFirst;
+            return promiseImpl.getRandomNumber(MIN, MAX);
+        }).then((resSecond) => {
+            expect(resSecond).toBeDefined();
+            sum += resSecond;
+            return promiseImpl.getRandomNumber(MIN, MAX);
+        }).then((resThird) => {
+            expect(resThird).toBeDefined();
+            sum += resThird;
+            return sum;
+        }).then((sumTotal) => {
+            expect(sumTotal).toBeGreaterThanOrEqual(MIN * ITERATIONS);
+            expect(sumTotal).toBeLessThanOrEqual(MAX * ITERATIONS);
+            done();
+        }).catch( (err) => {
+            console.error(err);
+            fail(err);
+            done();
+        });
+    });
+
+    // after refactoring version 2
+    xit('should getRandomNumber by three serial promises from 3 to 30', (done) => {
+        let sum: number = 0;
+        promiseImpl.getRandomNumber(MIN, MAX)
+            .then( (resFirst) => {
+            expect(resFirst).toBeDefined();
+            sum += resFirst;
+            return promiseImpl.getRandomNumber(MIN, MAX);
+        }).then((resSecond) => {
+            expect(resSecond).toBeDefined();
+            sum += resSecond;
+            return promiseImpl.getRandomNumber(MIN, MAX);
+        }).then((resThird) => {
+            expect(resThird).toBeDefined();
+            sum += resThird;
+            return sum;
+        }).then((sumTotal) => {
+            expect(sumTotal).toBeGreaterThanOrEqual(MIN * ITERATIONS);
+            expect(sumTotal).toBeLessThanOrEqual(MAX * ITERATIONS);
+            done();
+        }).catch( (err) => {
+            console.error(err);
+            fail(err);
+            done();
+        });
+    });
+
+    // before refactoring
     xit('should getRandomNumber by three parallel promises from 3 to 30', (done) => {
         const promiseFirst: Promise<number> = promiseImpl.getRandomNumber(MIN, MAX);
         const promiseSecond: Promise<number> = promiseImpl.getRandomNumber(MIN, MAX);
@@ -84,7 +140,32 @@ describe('promise', () => {
         });
     });
 
-    it('should check promisified method', (done) => {
+    // after refactoring version 1
+    it('should getRandomNumber by three parallel promises from 3 to 30', (done) => {
+        const promiseFirst: Promise<number> = promiseImpl.getRandomNumber(MIN, MAX);
+        const promiseSecond: Promise<number> = promiseImpl.getRandomNumber(MIN, MAX);
+        const promiseThird: Promise<number> = promiseImpl.getRandomNumber(MIN, MAX);
+        const promiseArray: any = Promise.all([promiseFirst, promiseSecond, promiseThird]);
+        promiseArray.then((res) => {
+            expect(res).toBeDefined();
+            expect(Array.isArray(res)).toBeTruthy();
+            expect(res.length).toBe(3);
+            return res;
+        }).then((total) => {
+            const totalSum: number = total.reduce((sum, el) => {
+                return sum + el;
+            }, 0);
+            expect(totalSum).toBeGreaterThanOrEqual(MIN * ITERATIONS);
+            expect(totalSum).toBeLessThanOrEqual(MAX * ITERATIONS);
+            done();
+        }).catch((err) => {
+            console.error(err);
+            fail(err);
+            done();
+        });
+    });
+
+    xit('should check promisified method', (done) => {
         const getRandomNumberPromisified: (arg1: number, arg2: number) => Promise<number> =
             promisify(promiseImpl.getRandomNumberWithoutPromise);
         getRandomNumberPromisified(MIN, MAX).then((res) => {

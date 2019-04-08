@@ -1,6 +1,6 @@
 import Person, {Gender} from './person';
 
-describe('mapUnitTests', () => {
+xdescribe('mapUnitTests', () => {
 
     let mapToTest: Map<string, Person>;
 

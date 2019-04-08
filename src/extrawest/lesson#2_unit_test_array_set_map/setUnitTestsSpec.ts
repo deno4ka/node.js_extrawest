@@ -1,6 +1,6 @@
 import Person, {Gender} from './person';
 
-describe('setUnitTests', () => {
+xdescribe('setUnitTests', () => {
 
     let setToTest: Set<Person>;
 

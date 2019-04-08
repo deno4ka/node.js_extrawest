@@ -1,6 +1,6 @@
 import Person, {Gender} from './person';
 
-describe('arrayUnitTests', () => {
+xdescribe('arrayUnitTests', () => {
 
     let arrToTest: Person[];
 
