@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@types/node": "latest",
+    "body-parser": "latest",
     "express": "latest",
     "package.json": "latest"
   },

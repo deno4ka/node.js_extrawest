@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Body Parser</title>
+    <style>
+        div {
+            margin-top: 25px;
+        }
+    </style>
+    <script>
+        window.onload = () => {
+            let btns = document.getElementsByTagName('button');
+            btns[0].addEventListener('click', () => {
+                let getReq = new XMLHttpRequest();
+                let str = encodeURIComponent('This is a sample GET request! <br />');
+                getReq.open('GET',`/test?text=${str}`);
+                getReq.onload = (res) => {
+                    console.log(res);
+                    document.getElementById('output').innerHTML += res.currentTarget.responseText;
+                };
+                getReq.send();
+            });
+
+            btns[1].addEventListener('click', () => {
+                let postReq = new XMLHttpRequest();
+                postReq.open('POST','/test');
+                postReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                postReq.onload = (res) => {
+                    document.getElementById('output').innerHTML += res.currentTarget.responseText;
+                };
+                let str = encodeURIComponent('This is a sample POST request! <br />');
+                postReq.send(`text=${str}`);
+            });
+        }
+    </script>
+</head>
+<body>
+
+<h2>Press button to make request to server!</h2>
+<div>
+    <button class="btn btn-success btn-lg">GET</button>
+</div>
+<div>
+    <button class="btn btn-success btn-lg">POST</button>
+</div>
+<div id="output"></div>
+
+</body>
+</html>
