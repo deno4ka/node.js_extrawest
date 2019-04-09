@@ -13,7 +13,7 @@ MongoClient.connect(url, options, (err, client) => {
         console.log('********** All Data **********');
         console.log(all);
         console.log('******************************');
-        collection.find({name:"Sergey"}).toArray((err, res) => {
+        collection.find({name:'Sergey'}).toArray((err, res) => {
             if (err) throw err;
             console.log('********** Employees with name Sergey **********');
             console.log(res);
