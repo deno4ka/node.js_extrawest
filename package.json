@@ -10,25 +10,26 @@
   "author": "deno4ka",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "latest",
-    "@babel/preset-env": "latest",
-    "del": "latest",
-    "gulp": "latest",
-    "gulp-babel": "latest",
-    "gulp-jasmine": "latest",
-    "gulp-sourcemaps": "latest",
-    "gulp-tslint": "latest",
-    "gulp-typescript": "latest",
-    "nyc": "latest",
-    "tslint": "latest",
-    "typescript": "latest",
-    "@types/jasmine": "latest"
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
+    "del": "^4.1.0",
+    "gulp": "^4.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-jasmine": "^4.0.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-tslint": "^8.1.4",
+    "gulp-typescript": "^5.0.1",
+    "nyc": "^13.3.0",
+    "tslint": "^5.15.0",
+    "typescript": "^3.4.2",
+    "@types/jasmine": "^3.3.12"
   },
   "dependencies": {
-    "@types/node": "latest",
-    "body-parser": "latest",
-    "express": "latest",
-    "package.json": "latest"
+    "@types/node": "^11.13.2",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongodb": "^3.2.3",
+    "package.json": "^2.0.1"
   },
   "nyc": {
     "check-coverage": true,
