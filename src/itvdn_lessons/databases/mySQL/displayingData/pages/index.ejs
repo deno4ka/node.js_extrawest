@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8">
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+		  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>App</title>
+</head>
+<body>
+	<div class="panel panel-primary">
+		<h1>ToDo List</h1>
+		<table class="table table-striped">
+			<thead>
+			<tr>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Completed</th>
+			</tr>
+			</thead>
+			<tbody>
+				<%- data %>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

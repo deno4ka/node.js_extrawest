@@ -27,6 +27,7 @@
   "dependencies": {
     "@types/node": "^11.13.2",
     "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
     "express": "^4.16.4",
     "mongodb": "^3.2.3",
     "mysql": "^2.16.0",

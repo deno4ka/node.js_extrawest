@@ -1,0 +1,54 @@
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+	  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script>
+	window.onload = () => {
+	    let btn = document.getElementById('btn');
+	    let errorContainer = document.getElementById('errorMsg');
+	    btn.onclick = () => {
+	        let xhr = new XMLHttpRequest();
+	        xhr.open('POST', 'add/newItem');
+	        let inputs = document.getElementsByTagName('input');
+	        for (let i = 0; i < inputs.length - 1; i++) {
+	            if (inputs[i].value == '') {
+	                errorContainer.innerHTML = 'Error! Empty Field!';
+	                console.log('Empty Field!');
+	                return;
+				}
+			}
+	        errorContainer.innerHTML = '';
+	        let item = {
+	            name: inputs[0].value,
+				description: inputs[1].value,
+				get completed() {
+	                return inputs[2].checked ? 1 : 0
+				}
+			};
+			let data = JSON.stringify(item);
+			xhr.setRequestHeader('Content-Type', 'application/json');
+			xhr.send(data);
+	    }
+	}
+</script>
+
+<div class="card">
+	<div class="card-header">
+		<h3>Add item!</h3>
+	</div>
+	<div class="card-body">
+		<div class="form-group">
+			<label>Name: <input type="text" class="form-control" /></label>
+		</div>
+		<div class="form-group">
+			<label>Description: <input type="text" class="form-control" /></label>
+		</div>
+		<div class="form-group">
+			<label>Completed: <input type="checkbox" /></label>
+		</div>
+	</div>
+	<div class="card-footer">
+		<div class="form-group">
+			<a href="/" class="btn btn-lg btn-info" id="btn">Apply</a>
+			<h5 style="color: red; font-weight: bold;" id="errorMsg"></h5>
+		</div>
+	</div>
+</div>
