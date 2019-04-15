@@ -5,8 +5,8 @@ import IAsync from './IAsync';
 describe('promise', () => {
 
     const   MIN: number         = 1,
-        MAX: number         = 10,
-        ITERATIONS: number  = 3;
+            MAX: number         = 10,
+            ITERATIONS: number  = 3;
     const asyncImpl: IAsync = new AsyncImpl();
 
     beforeAll(() => {
@@ -14,53 +14,27 @@ describe('promise', () => {
     });
 
     // POSITIVE CASES
-    it('should getRandomNumber from 1 to 10', (done) => {
-        const promise: Promise<number> = asyncImpl.getRandomNumber(MIN, MAX);
-        promise.then( (res) => {
-            expect(res).toBeDefined();
-            expect(res).toBeGreaterThanOrEqual(MIN);
-            expect(res).toBeLessThanOrEqual(MAX);
-            done();
-        }).catch( (err) => {
-            console.error(err);
-            fail(err);
-            done();
-        });
+    it('should getRandomNumber from 1 to 10', async () => {
+        const res: number = await asyncImpl.getRandomNumber(MIN, MAX);
+        expect(res).toBeDefined();
+        expect(res).toBeGreaterThanOrEqual(MIN);
+        expect(res).toBeLessThanOrEqual(MAX);
     });
 
     // before refactoring version
-    it('should getRandomNumber by three serial promises from 3 to 30', (done) => {
+    it('should getRandomNumber by three serial promises from 3 to 30', async () => {
         let sum: number = 0;
-        const promiseFirst: Promise<number> = asyncImpl.getRandomNumber(MIN, MAX);
-        promiseFirst.then( (resFirst) => {
-            expect(resFirst).toBeDefined();
-            sum += resFirst;
-            const promiseSecond: Promise<number> = asyncImpl.getRandomNumber(MIN, MAX);
-            promiseSecond.then((resSecond) => {
-                expect(resSecond).toBeDefined();
-                sum += resSecond;
-                const promiseThird: Promise<number> = asyncImpl.getRandomNumber(MIN, MAX);
-                promiseThird.then((resThird) => {
-                    expect(resThird).toBeDefined();
-                    sum += resThird;
-                    expect(sum).toBeGreaterThanOrEqual(MIN * ITERATIONS);
-                    expect(sum).toBeLessThanOrEqual(MAX * ITERATIONS);
-                    done();
-                }).catch((err) => {
-                    console.error(err);
-                    fail(err);
-                    done();
-                });
-            }).catch((err) => {
-                console.error(err);
-                fail(err);
-                done();
-            });
-        }).catch( (err) => {
-            console.error(err);
-            fail(err);
-            done();
-        });
+        const resFirst: number = await asyncImpl.getRandomNumber(MIN, MAX);
+        expect(resFirst).toBeDefined();
+        sum += resFirst;
+        const resSecond: number = await asyncImpl.getRandomNumber(MIN, MAX);
+        expect(resSecond).toBeDefined();
+        sum += resSecond;
+        const resThird: number = await asyncImpl.getRandomNumber(MIN, MAX);
+        expect(resThird).toBeDefined();
+        sum += resThird;
+        expect(sum).toBeGreaterThanOrEqual(MIN * ITERATIONS);
+        expect(sum).toBeLessThanOrEqual(MAX * ITERATIONS);
     });
 
     // after refactoring version 1
