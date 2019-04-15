@@ -1,5 +1,7 @@
 import IPromise from './Ipromise';
 
+const TIMEOUT: number = 100;
+
 export default class PromiseImpl implements IPromise {
 
     public constructor() {
@@ -10,7 +12,7 @@ export default class PromiseImpl implements IPromise {
         return new Promise((resolve, reject) => {
             setTimeout( () => {
                 resolve(Math.random() * (max - min) + min);
-            }, 3000);
+            }, TIMEOUT);
         });
     }
 
@@ -18,14 +20,14 @@ export default class PromiseImpl implements IPromise {
         return new Promise((resolve, reject) => {
             setTimeout( () => {
                 reject('something went wrong...');
-            }, 3000);
+            }, TIMEOUT);
         });
     }
 
     public getRandomNumberWithoutPromise = (min: number, max: number, callback): void => {
         setTimeout( () => {
             callback(null, Math.random() * (max - min) + min);
-        }, 3000);
+        }, TIMEOUT);
     }
 
 }

@@ -2,6 +2,7 @@
   "extends": "tslint:recommended",
 //  "rulesDirectory": ["path/to/custom/rules/directory/", "another/path/"],
   "rules": {
+    "no-return-await": true,
     "one-variable-per-declaration": false,
     "typedef": [true, "variable-declaration"],
     "max-line-length": {
@@ -28,7 +29,8 @@
 //  },
   "linterOptions": {
   "exclude": [
-    "src/itvdn_lessons/**"
+    "src/itvdn_lessons/**",
+    "src/resources/**"
   ]
 }
 }

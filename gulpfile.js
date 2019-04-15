@@ -56,7 +56,7 @@ gulp.task('jasmine', () => {
 // gulp.task('all', gulp.series(['del', 'tslint', 'compile', 'jasmine']));
 
 // gulp.task('default', gulp.series(['all']));
-gulp.task('default', gulp.series(['del', 'tslint', 'compile', 'jasmine']));
+gulp.task('default', gulp.series(['del', 'tslint', 'compile']));
 
 // gulp.task('default', mock => { // empty task
 //     mock();
