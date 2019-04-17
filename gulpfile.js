@@ -27,7 +27,6 @@ gulp.task('compile', () => {
     return gulp.src('src/**/*.ts')
         .pipe(sourcemaps.init())
         .pipe(ts.createProject('tsconfig.json')())
-        // ?? why we need babel ??
         .pipe(babel({
             ignore: [
                 '**/*.d.ts'

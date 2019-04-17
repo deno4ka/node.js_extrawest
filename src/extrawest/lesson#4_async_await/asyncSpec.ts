@@ -65,9 +65,8 @@ describe('promise', () => {
     // NEGATIVE CASES
     it('should fail getRandomNumber from 1 to 10', async () => {
         try {
-            const res: number = await asyncImpl.getRandomNumberFail(MIN, MAX);
+            await asyncImpl.getRandomNumberFail(MIN, MAX);
             fail('test fails...');
-            expect(res).toBeUndefined();
         } catch (error) {
             expect(error).toBeDefined();
             expect(error).toEqual('something went wrong...');
@@ -80,9 +79,8 @@ describe('promise', () => {
             const promiseFirst: Promise<number> = asyncImpl.getRandomNumber(MIN, MAX);
             const promiseSecond: Promise<number> = asyncImpl.getRandomNumberFail(MIN, MAX);
             const promiseThird: Promise<number> = asyncImpl.getRandomNumber(MIN, MAX);
-            const results: number[] = await Promise.all([promiseFirst, promiseSecond, promiseThird]);
+            await Promise.all([promiseFirst, promiseSecond, promiseThird]);
             fail('test fails...');
-            expect(results).toBeUndefined();
         } catch (error) {
             expect(error).toBeDefined();
             expect(error).toEqual('something went wrong...');
