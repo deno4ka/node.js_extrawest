@@ -1,6 +1,7 @@
 import { promisify } from 'util';
 import AsyncImpl from './asyncImpl';
 import IAsync from './IAsync';
+import logger from './winstonConfig';
 
 describe('promise', () => {
 
@@ -21,7 +22,6 @@ describe('promise', () => {
         expect(res).toBeLessThanOrEqual(MAX);
     });
 
-    // before refactoring version
     it('should getRandomNumber by three serial promises from 3 to 30', async () => {
         let sum: number = 0;
         const resFirst: number = await asyncImpl.getRandomNumber(MIN, MAX);
@@ -37,151 +37,56 @@ describe('promise', () => {
         expect(sum).toBeLessThanOrEqual(MAX * ITERATIONS);
     });
 
-    // after refactoring version 1
-    it('should getRandomNumber by three serial promises from 3 to 30', (done) => {
-        let sum: number = 0;
-        asyncImpl.getRandomNumber(MIN, MAX)
-            .then( (resFirst) => {
-                expect(resFirst).toBeDefined();
-                sum += resFirst;
-                return asyncImpl.getRandomNumber(MIN, MAX);
-            }).then((resSecond) => {
-            expect(resSecond).toBeDefined();
-            sum += resSecond;
-            return asyncImpl.getRandomNumber(MIN, MAX);
-        }).then((resThird) => {
-            expect(resThird).toBeDefined();
-            sum += resThird;
-            return sum;
-        }).then((sumTotal) => {
-            expect(sumTotal).toBeGreaterThanOrEqual(MIN * ITERATIONS);
-            expect(sumTotal).toBeLessThanOrEqual(MAX * ITERATIONS);
-            done();
-        }).catch( (err) => {
-            console.error(err);
-            fail(err);
-            done();
-        });
-    });
-
-    // after refactoring version 2
-    it('should getRandomNumber by three serial promises from 3 to 30', (done) => {
-        let sum: number = 0;
-        asyncImpl.getRandomNumber(MIN, MAX)
-            .then( (resFirst) => {
-                expect(resFirst).toBeDefined();
-                sum += resFirst;
-                return asyncImpl.getRandomNumber(MIN, MAX);
-            }).then((resSecond) => {
-            expect(resSecond).toBeDefined();
-            sum += resSecond;
-            return asyncImpl.getRandomNumber(MIN, MAX);
-        }).then((resThird) => {
-            expect(resThird).toBeDefined();
-            sum += resThird;
-            return sum;
-        }).then((sumTotal) => {
-            expect(sumTotal).toBeGreaterThanOrEqual(MIN * ITERATIONS);
-            expect(sumTotal).toBeLessThanOrEqual(MAX * ITERATIONS);
-            done();
-        }).catch( (err) => {
-            console.error(err);
-            fail(err);
-            done();
-        });
-    });
-
-    // before refactoring
-    it('should getRandomNumber by three parallel promises from 3 to 30', (done) => {
+    it('should getRandomNumber by three parallel promises from 3 to 30', async () => {
         const promiseFirst: Promise<number> = asyncImpl.getRandomNumber(MIN, MAX);
         const promiseSecond: Promise<number> = asyncImpl.getRandomNumber(MIN, MAX);
         const promiseThird: Promise<number> = asyncImpl.getRandomNumber(MIN, MAX);
-        const promiseArray: any = Promise.all([promiseFirst, promiseSecond, promiseThird]);
-        promiseArray.then((res) => {
-            expect(res).toBeDefined();
-            expect(Array.isArray(res)).toBeTruthy();
-            expect(res.length).toBe(3);
-            const total: number = res.reduce((sum, el) => {
-                return sum + el;
-            }, 0);
-            expect(total).toBeGreaterThanOrEqual(MIN * ITERATIONS);
-            expect(total).toBeLessThanOrEqual(MAX * ITERATIONS);
-            done();
-        }).catch((err) => {
-            console.error(err);
-            fail(err);
-            done();
-        });
+        const results: number[] = await Promise.all([promiseFirst, promiseSecond, promiseThird]);
+        expect(results).toBeDefined();
+        expect(Array.isArray(results)).toBeTruthy();
+        expect(results.length).toBe(3);
+        const totalSum: number = results.reduce((sum, el) => {
+            return sum + el;
+        }, 0);
+        expect(totalSum).toBeGreaterThanOrEqual(MIN * ITERATIONS);
+        expect(totalSum).toBeLessThanOrEqual(MAX * ITERATIONS);
     });
 
-    // after refactoring version 1
-    it('should getRandomNumber by three parallel promises from 3 to 30', (done) => {
-        const promiseFirst: Promise<number> = asyncImpl.getRandomNumber(MIN, MAX);
-        const promiseSecond: Promise<number> = asyncImpl.getRandomNumber(MIN, MAX);
-        const promiseThird: Promise<number> = asyncImpl.getRandomNumber(MIN, MAX);
-        const promiseArray: any = Promise.all([promiseFirst, promiseSecond, promiseThird]);
-        promiseArray.then((res) => {
-            expect(res).toBeDefined();
-            expect(Array.isArray(res)).toBeTruthy();
-            expect(res.length).toBe(3);
-            return res;
-        }).then((total) => {
-            const totalSum: number = total.reduce((sum, el) => {
-                return sum + el;
-            }, 0);
-            expect(totalSum).toBeGreaterThanOrEqual(MIN * ITERATIONS);
-            expect(totalSum).toBeLessThanOrEqual(MAX * ITERATIONS);
-            done();
-        }).catch((err) => {
-            console.error(err);
-            fail(err);
-            done();
-        });
-    });
-
-    it('should check promisified method', (done) => {
+    it('should check promisified method', async () => {
         const getRandomNumberPromisified: (arg1: number, arg2: number) => Promise<number> =
             promisify(asyncImpl.getRandomNumberWithoutPromise);
-        getRandomNumberPromisified(MIN, MAX).then((res) => {
-            // console.log(res);
-            expect(res).toBeDefined();
-            expect(res).toBeGreaterThanOrEqual(MIN);
-            expect(res).toBeLessThanOrEqual(MAX);
-            done();
-        }).catch( (err) => {
-            console.error(err);
-            fail(err);
-            done();
-        });
+        const res: number = await getRandomNumberPromisified(MIN, MAX);
+        expect(res).toBeDefined();
+        expect(res).toBeGreaterThanOrEqual(MIN);
+        expect(res).toBeLessThanOrEqual(MAX);
     });
     // END OF POSITIVE CASES
 
     // NEGATIVE CASES
-    it('should fail getRandomNumber from 1 to 10', (done) => {
-        const promise: Promise<number> = asyncImpl.getRandomNumberFail(MIN, MAX);
-        promise.then( (res) => {
+    it('should fail getRandomNumber from 1 to 10', async () => {
+        try {
+            const res: number = await asyncImpl.getRandomNumberFail(MIN, MAX);
             fail('test fails...');
-            done();
-        }).catch( (err) => {
-            expect(err).toBeDefined();
-            expect(err).toEqual('something went wrong...');
-            done();
-        });
+            expect(res).toBeUndefined();
+        } catch (error) {
+            expect(error).toBeDefined();
+            expect(error).toEqual('something went wrong...');
+            logger.error(error);
+        }
     });
 
-    it('should fail getRandomNumber by three parallel promises from 3 to 30', (done) => {
-        const promiseFirst: Promise<number> = asyncImpl.getRandomNumber(MIN, MAX);
-        const promiseSecond: Promise<number> = asyncImpl.getRandomNumberFail(MIN, MAX);
-        const promiseThird: Promise<number> = asyncImpl.getRandomNumber(MIN, MAX);
-        const promiseArray: any = Promise.all([promiseFirst, promiseSecond, promiseThird]);
-        promiseArray.then((res) => {
+    it('should fail getRandomNumber by three parallel promises from 3 to 30', async () => {
+        try {
+            const promiseFirst: Promise<number> = asyncImpl.getRandomNumber(MIN, MAX);
+            const promiseSecond: Promise<number> = asyncImpl.getRandomNumberFail(MIN, MAX);
+            const promiseThird: Promise<number> = asyncImpl.getRandomNumber(MIN, MAX);
+            const results: number[] = await Promise.all([promiseFirst, promiseSecond, promiseThird]);
             fail('test fails...');
-            done();
-        }).catch((err) => {
-            expect(err).toBeDefined();
-            expect(err).toEqual('something went wrong...');
-            done();
-        });
+            expect(results).toBeUndefined();
+        } catch (error) {
+            expect(error).toBeDefined();
+            expect(error).toEqual('something went wrong...');
+        }
     });
     // END OF NEGATIVE CASES
 

@@ -2,10 +2,10 @@
   "all": true,
   "cache": false,
   "check-coverage": true,
-  "statements": 80,
-  "branches": 80,
-  "functions": 80,
-  "lines": 80,
+  "statements": 91,
+  "branches": 86,
+  "functions": 94,
+  "lines": 92,
   "es-module": true,
   "extension": [
 

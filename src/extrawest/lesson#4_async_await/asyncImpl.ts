@@ -1,5 +1,4 @@
 import IAsync from './IAsync';
-import logger from './winstonConfig';
 
 const TIMEOUT: number = 100;
 
@@ -12,7 +11,6 @@ export default class AsyncImpl implements IAsync {
     public getRandomNumber = async (min: number, max: number): Promise<number> => {
         await setTimeout( () => {
             // not empty block
-            logger.info('getRandomNumber');
         }, TIMEOUT);
         return Math.random() * (max - min) + min;
     }
