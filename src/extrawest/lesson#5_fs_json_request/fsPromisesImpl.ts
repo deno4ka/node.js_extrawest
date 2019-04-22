@@ -22,4 +22,13 @@ export default class FsPromisesImpl implements IFS {
         return fs.promises.copyFile(src, dest, flags);
     }
 
+    public watch(filename: string | Buffer | url.URL, options: string | object,
+                 listener: (eventType: any, filename: any) => {} | undefined): fs.FSWatcher {
+        return fs.watch(filename, options, listener);
+    }
+
+    public rename(oldPath: string | Buffer | url.URL, newPath: string | Buffer | url.URL): Promise<void> {
+        return fs.promises.rename(oldPath, newPath);
+    }
+
 }
