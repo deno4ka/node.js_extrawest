@@ -1,4 +1,5 @@
 // require('@babel/register');
+// import 'reflect-metadata';
 
 const gulp = require('gulp');
 const del = require('del');
@@ -16,7 +17,7 @@ gulp.task('del', () => {
 });
 
 gulp.task('tslint', () => {
-    return gulp.src('src/**', '!src/itvdn_lessons/**')
+    return gulp.src('src/**', '!src/itvdn_lessons/**', '!src/extrawest/')
         .pipe(tslint({
             formatter: 'verbose'
         }))
@@ -47,6 +48,11 @@ gulp.task('compile', () => {
         .pipe(gulp.dest('built/local'));
 });
 
+gulp.task('copy', () => {
+    return gulp.src('src/resources/*.txt')
+        .pipe(gulp.dest('built/local/resources'));
+});
+
 gulp.task('jasmine', () => {
     return gulp.src('built/**/*[sS]pec.js')
         .pipe(jasmine());
@@ -55,7 +61,7 @@ gulp.task('jasmine', () => {
 // gulp.task('all', gulp.series(['del', 'tslint', 'compile', 'jasmine']));
 
 // gulp.task('default', gulp.series(['all']));
-gulp.task('default', gulp.series(['del', 'tslint', 'compile']));
+gulp.task('default', gulp.series(['del', 'tslint', 'compile', 'copy']));
 
 // gulp.task('default', mock => { // empty task
 //     mock();
