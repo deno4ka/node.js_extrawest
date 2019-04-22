@@ -2,7 +2,7 @@
   "extends": "tslint:recommended",
 //  "rulesDirectory": ["path/to/custom/rules/directory/", "another/path/"],
   "rules": {
-    "no-return-await": true,
+    "no-return-await": false,
     "one-variable-per-declaration": false,
     "typedef": [true, "variable-declaration"],
     "max-line-length": {

@@ -5,8 +5,13 @@ import IFS from './IFS';
 export default class FsPromisesImpl implements IFS {
 
     // fs.exists(path, callback) -> !!!Deprecated: Use fs.stat() or fs.access() instead.
-    public exists(path: string | Buffer | url.URL, mode: number): Promise<void> {
-        return fs.promises.access(path, mode);
+    public async exists(path: string | Buffer | url.URL): Promise<boolean> {
+        try {
+            await fs.promises.access(path, fs.constants.R_OK | fs.constants.W_OK);
+            return true;
+        } catch (error) {
+            return false;
+        }
     }
 
     public read(path: string): Promise<Buffer> {
