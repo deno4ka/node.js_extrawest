@@ -47,7 +47,8 @@
       "built/**/*.js"
     ],
     "exclude": [
-      "built/**/*[sS]pec.js"
+      "built/**/*[sS]pec.js",
+      "built/local/extrawest/lesson#5_fs_json_request/request/model/**"
     ]
   }
 }
