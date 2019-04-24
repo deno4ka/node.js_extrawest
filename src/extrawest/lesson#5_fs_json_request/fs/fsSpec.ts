@@ -6,6 +6,7 @@ import IFS from './IFS';
 describe ('fileSystem', () => {
 
     const fsPromisesImpl: IFS = new FsPromisesImpl();
+    const dirPath: string = __dirname + '\\..\\..\\..\\resources\\';
     const positiveReadPath: string = __dirname + '\\..\\..\\..\\resources\\test_read.txt';
     const negativeReadPath: string = __dirname + '\\..\\..\\..\\resources\\file_not_exists.txt';
     const writePath: string = __dirname + '\\..\\..\\..\\resources\\test_write.txt';
@@ -33,7 +34,7 @@ describe ('fileSystem', () => {
     });
 
     it ('should watch folder/file', async () => {
-        const watcher: fs.FSWatcher = fsPromisesImpl.watch(positiveReadPath, null, null);
+        const watcher: fs.FSWatcher = fsPromisesImpl.watch(dirPath, null, null);
 
         // Event: 'change' -> emitted when something changes in a watched directory or file.
         watcher.on('change', (eventType: string, filename: string | Buffer) => {

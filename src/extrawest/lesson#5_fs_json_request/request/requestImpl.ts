@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import RPN from 'request-promise-native';
 import IRequest from './IRequest';
 

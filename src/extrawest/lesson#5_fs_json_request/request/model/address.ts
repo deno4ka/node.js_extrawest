@@ -4,18 +4,18 @@ import Geo from './geo';
 export default class Address {
 
     @JsonProperty( {name: 'street', type: String} )
-    public street: string;
+    public street: string = undefined;
 
     @JsonProperty( {name: 'suite', type: String} )
-    public suite: string;
+    public suite: string = undefined;
 
     @JsonProperty( {name: 'city', type: String} )
-    public city: string;
+    public city: string = undefined;
 
     @JsonProperty( {name: 'zipcode', type: String} )
-    public zipcode: string;
+    public zipcode: string = undefined;
 
-    @JsonProperty( {name: 'geo', type: Object} )
-    public geo: Geo;
+    @JsonProperty( {name: 'geo', type: Geo} )
+    public geo: Geo = undefined;
 
 }
