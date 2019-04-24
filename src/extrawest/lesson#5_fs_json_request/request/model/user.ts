@@ -22,10 +22,10 @@ export default class User {
     @JsonProperty( {name: 'website', type: String})
     public website: string = undefined;
 
-    @JsonProperty( {name: 'company', type: Company})
+    @JsonProperty( {name: 'company'})
     public company: Company = undefined;
 
-    @JsonProperty( {name: 'address', type: Address})
+    @JsonProperty( {name: 'address'})
     public address: Address = undefined;
 
 }
