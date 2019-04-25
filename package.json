@@ -20,7 +20,7 @@
     "gulp-sourcemaps": "^2.6.5",
     "gulp-tslint": "^8.1.4",
     "gulp-typescript": "^5.0.1",
-    "mock-fs": "^4.8.0",
+    "mock-fs": "^4.9.0",
     "nyc": "^13.3.0",
     "tslint": "^5.15.0",
     "typescript": "^3.4.2"
@@ -30,6 +30,7 @@
     "body-parser": "^1.18.3",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "fs-extra": "^7.0.1",
     "json-object-mapper": "^1.6.0",
     "mongodb": "^3.2.3",
     "mysql": "^2.16.0",

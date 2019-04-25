@@ -27,12 +27,12 @@ describe ('', () => {
     it ('should GET user', async () => {
         const response: string = await requestImpl.get('https://jsonplaceholder.typicode.com/users/1');
         expect(response).toBeDefined();
-        console.log('>> GET user response: ', response);
+        // console.log('>> GET user response: ', response);
         const user: User = ObjectMapper.deserialize(User, response);
-        console.log('>> user: ', user);
+        // console.log('>> user: ', user);
         // console.log('>> user.name: ', user.name);
         const userJson: String = ObjectMapper.serialize(user);
-        console.log('>> userJson: ', userJson);
+        // console.log('>> userJson: ', userJson);
     });
 
     it ('should POST new post', async () => {

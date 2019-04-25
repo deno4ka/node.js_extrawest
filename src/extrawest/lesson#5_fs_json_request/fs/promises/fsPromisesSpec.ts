@@ -1,18 +1,18 @@
 import fs from 'fs';
 import 'reflect-metadata';
 import FsPromisesImpl from './fsPromisesImpl';
-import IFS from './IFS';
+import IFSPromises from './IFSPromises';
 
-describe ('fileSystem', () => {
+describe ('fileSystem with promises', () => {
 
-    const fsPromisesImpl: IFS = new FsPromisesImpl();
-    const dirPath: string = __dirname + '\\..\\..\\..\\resources\\';
-    const positiveReadPath: string = __dirname + '\\..\\..\\..\\resources\\test_read.txt';
-    const negativeReadPath: string = __dirname + '\\..\\..\\..\\resources\\file_not_exists.txt';
-    const writePath: string = __dirname + '\\..\\..\\..\\resources\\test_write.txt';
-    const destPath: string = __dirname + '\\..\\..\\..\\resources\\test_copy.txt';
-    const renameSrcPath: string = __dirname + '\\..\\..\\..\\resources\\test_rename.txt';
-    const renameDstPath: string = __dirname + '\\..\\..\\..\\!test_renamed!.txt';
+    const fsPromisesImpl: IFSPromises = new FsPromisesImpl();
+    const dirPath: string = __dirname + '\\..\\..\\..\\..\\resources\\';
+    const positiveReadPath: string = __dirname + '\\..\\..\\..\\..\\resources\\test_read.txt';
+    const negativeReadPath: string = __dirname + '\\..\\..\\..\\..\\resources\\file_not_exists.txt';
+    const writePath: string = __dirname + '\\..\\..\\..\\..\\resources\\test_write.txt';
+    const destPath: string = __dirname + '\\..\\..\\..\\..\\resources\\test_copy.txt';
+    const renameSrcPath: string = __dirname + '\\..\\..\\..\\..\\resources\\test_rename.txt';
+    const renameDstPath: string = __dirname + '\\..\\..\\..\\..\\!test_renamed!.txt';
 
     // POSITIVE CASES
     it('should exists file', async () => {

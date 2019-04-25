@@ -1,8 +1,8 @@
 import fs from 'fs';
 import url from 'url';
-import IFS from './IFS';
+import IFSPromises from './IFSPromises';
 
-export default class FsPromisesImpl implements IFS {
+export default class FsPromisesImpl implements IFSPromises {
 
     // fs.exists(path, callback) -> !!!Deprecated: Use fs.stat() or fs.access() instead.
     public async exists(path: string | Buffer | url.URL): Promise<boolean> {

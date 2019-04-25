@@ -1,7 +1,7 @@
 import fs from 'fs';
 import url from 'url';
 
-export default interface IFS {
+export default interface IFSPromises {
     exists(path: string | Buffer | url.URL): Promise<boolean>;
     read(path: string): Promise<Buffer>;
     write(file: string | Buffer | url.URL | fs.promises.FileHandle,
