@@ -20,7 +20,9 @@
 //    },
     "quotemark": [true, "single"],
     "trailing-comma": [false],
-    "ban-types": [false]
+    "ban-types": [false],
+    "object-literal-sort-keys": false,
+    "ordered-imports": false
   },
   "jsRules": true,
 //  "jsRules": {

@@ -25,6 +25,7 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "listFiles": true,
-    "pretty": true
+    "pretty": true,
+    "outDir": "built/local"
   }
 }
