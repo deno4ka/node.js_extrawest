@@ -12,10 +12,10 @@ describe ('', () => {
     const newPostResponse: string = __dirname + '\\..\\..\\..\\resources\\newPostResponse.json';
 
     beforeAll(() => {
-        // nock('https://jsonplaceholder.typicode.com')
-        //     .get('/users').replyWithFile(200, usersResponse)
-        //     .get('/users/1').replyWithFile(200, userResponse)
-        //     .post('/posts', {body: 'bar', title: 'foo', userId: 1} ).replyWithFile(200, newPostResponse);
+        nock('https://jsonplaceholder.typicode.com')
+            .get('/users').replyWithFile(200, usersResponse)
+            .get('/users/1').replyWithFile(200, userResponse)
+            .post('/posts', {body: 'bar', title: 'foo', userId: 1} ).replyWithFile(200, newPostResponse);
     });
 
     afterAll(() => {
