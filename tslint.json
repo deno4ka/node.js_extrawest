@@ -33,7 +33,8 @@
   "linterOptions": {
   "exclude": [
     "src/itvdn_lessons/**",
-    "src/resources/**"
+    "src/resources/**",
+    "src/extrawest/lesson#6_express_js/views/**"
   ]
 }
 }

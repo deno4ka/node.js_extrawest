@@ -49,7 +49,7 @@ gulp.task('compile', () => {
 });
 
 gulp.task('copy', () => {
-    return gulp.src('src/resources/*.+(txt|json)')
+    return gulp.src('src/resources/**')
         .pipe(gulp.dest('built/local/resources'));
 });
 

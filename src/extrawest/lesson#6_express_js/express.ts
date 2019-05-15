@@ -3,11 +3,12 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import flash from 'connect-flash';
-import {ObjectMapper} from "json-object-mapper"
+import {ObjectMapper} from 'json-object-mapper';
 import nock from 'nock';
+import Handlebars from 'handlebars';
 
 import IRequest from '../lesson#5_fs_json_request/request/IRequest';
-import User from "../lesson#5_fs_json_request/request/model/user"
+import User from '../lesson#5_fs_json_request/request/model/user';
 
 import RequestImpl from '../lesson#5_fs_json_request/request/requestImpl';
 
@@ -15,10 +16,10 @@ const usersResponse: string = __dirname + '\\..\\..\\..\\resources\\usersRespons
 const userResponse: string = __dirname + '\\..\\..\\..\\resources\\userResponse.json';
 const newPostResponse: string = __dirname + '\\..\\..\\..\\resources\\newPostResponse.json';
 
-nock('https://jsonplaceholder.typicode.com')
-    .get('/users').replyWithFile(200, usersResponse)
-    .get('/users/1').replyWithFile(200, userResponse)
-    .post('/posts', {body: 'bar', title: 'foo', userId: 1} ).replyWithFile(200, newPostResponse);
+// nock('https://jsonplaceholder.typicode.com')
+//     .get('/users').replyWithFile(200, usersResponse)
+//     .get('/users/1').replyWithFile(200, userResponse)
+//     .post('/posts', {body: 'bar', title: 'foo', userId: 1} ).replyWithFile(200, newPostResponse);
 
 const app: Application = express();
 
@@ -58,12 +59,13 @@ app.get('/connect-flash-test', (req: any, res: Response) => {
 });
 
 app.get('/get-users', async (req: Request, res: Response) => {
+    const viewsDir: string = __dirname + '\\..\\..\\..\\..\\resources\\views\\';
     const response: string = await requestImpl.get('https://jsonplaceholder.typicode.com/users');
     // res.send(response);
     // console.log('>> GET nock users response: ', response);
-    const users: User[] = ObjectMapper.deserializeArray(User, response);
-    res.render('users.hbs', {
-        users
+    // const users: User[] = ObjectMapper.deserializeArray(User, response);
+    res.render(viewsDir + 'users.hbs', {
+        users: [{name: 'Den'}, {name: 'Ivan'}]
     });
 });
 
