@@ -4,7 +4,7 @@
   "description": "learning",
   "main": "index.js",
   "scripts": {
-    "build": "gulp && node ./built/local/extrawest/lesson#6_express_js/express.js",
+    "build": "gulp && node ./built/local/extrawest/lesson#7_db/express.js",
     "test": "nyc --exclude-after-remap=false gulp jasmine"
   },
   "author": "deno4ka",
@@ -16,6 +16,7 @@
     "@types/nock": "9.3.1",
     "@types/express": "4.16.1",
     "@types/node": "11.13.2",
+    "@types/sequelize": "4.28.1",
     "del": "4.1.0",
     "gulp": "4.0.0",
     "gulp-babel": "8.0.0",
@@ -41,10 +42,12 @@
     "handlebars": "4.1.2",
     "json-object-mapper": "1.6.0",
     "mongodb": "3.2.3",
-    "mysql": "2.16.0",
+    "mysql2": "1.6.5",
     "reflect-metadata": "0.1.13",
     "request": "2.88.0",
     "request-promise-native": "1.0.7",
+    "sequelize": "5.8.6",
+    "sequelize-typescript": "0.6.11",
     "winston": "3.2.1"
   },
   "nyc": {
