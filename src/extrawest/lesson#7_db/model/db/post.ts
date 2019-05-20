@@ -7,16 +7,16 @@ import {Omit, RecursivePartial} from 'sequelize-typescript/lib/utils/types';
 export default class Post extends Model<Post> {
 
     @Column( { field: 'id', primaryKey: true } )
-    public id: number = undefined;
+    public id: number;
 
     @Column( { field: 'title', type: DataType.TEXT } )
-    public title: string = undefined;
+    public title: string;
 
     @Column( { field: 'body' } )
-    public body: string = undefined;
+    public body: string;
 
     @Column( {field: 'user_id'} )
-    public userId: number = undefined;
+    public userId: number;
 
     @HasMany(() => Comment)
     public comments: Comment[];

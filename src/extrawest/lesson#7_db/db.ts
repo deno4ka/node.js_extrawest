@@ -28,4 +28,8 @@ export default class DB {
         return await Post.findAll({raw: true});
     }
 
+    public static async updatePost(post: Post): Promise<[number, Post[]]> {
+        return await Post.update(post, {where: {id: post.id}});
+    }
+
 }

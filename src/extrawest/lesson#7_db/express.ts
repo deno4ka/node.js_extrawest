@@ -53,7 +53,6 @@ app.get('/', (req: any, res: Response) => {
 });
 
 app.get('/get-posts', async (req: Request, res: Response) => {
-    // TODO: get post from DB, if no post get them from API
     const posts: Post[] = await DB.getPosts();
     if (posts.length === 0) {
         console.log('Getting posts from API');
@@ -85,23 +84,53 @@ app.get('/get-posts', async (req: Request, res: Response) => {
 app.get('/get-post/:postId', async (req: Request, res: Response) => {
     const KEY_NAME: string = 'postId';
     const postId: number = req.params[KEY_NAME];
-    console.log('postId: ' + postId);
-    const post: Post = await DB.getPost(postId);
+    // console.log('> postId: ' + postId);
+    let post: Post = await DB.getPost(postId);
     if (null === post) {
+        console.log(`Getting posts with id=${postId} from API`);
         const response: string = await requestImpl.get(`https://jsonplaceholder.typicode.com/posts/${postId}`);
+        const responsePost: PostJson = ObjectMapper.deserialize(PostJson, response);
+        // console.log('>> deserialized post: ', responsePost);
+        // console.log('Saving post from API to DB');
+        post = new Post();
+        post.title = responsePost.title;
+        post.body = responsePost.body;
+        post.userId = responsePost.userId;
+        post = await DB.addPost(post);
+        // console.log('>>> post saved: ', post);
     }
+    res.send(post);
 });
 
-// app.post('/new-post', async (req: Request, res: Response) => {
-//     const response: string = await requestImpl.post('https://jsonplaceholder.typicode.com/posts', req.body);
-//     res.send(response);
-// });
-//
-// app.put('/update-post', async (req: Request, res: Response) => {
-//     const response: string = await requestImpl.put('https://jsonplaceholder.typicode.com/posts/1', req.body);
-//     res.send(response);
-// });
-//
+app.post('/new-post', async (req: Request, res: Response) => {
+    console.log('adding new post');
+    const post: Post = new Post();
+    post.title = req.body.title;
+    post.body = req.body.body;
+    post.userId = req.body.userId;
+    await DB.addPost(post);
+    res.sendStatus(200).json({status: 'ok'});
+    console.log('post added!');
+});
+
+app.put('/update-post', async (req: Request, res: Response) => {
+    let post: Post = await DB.getPost(req.body.id);
+    if (null === post) {
+        console.log('adding new post');
+        post = new Post();
+        post.title = req.body.title;
+        post.body = req.body.body;
+        post.userId = req.body.userId;
+        await DB.addPost(post);
+        console.log('post added!');
+    } else {
+        console.log('updating old post');
+        await DB.updatePost(post);
+        console.log('post updated!');
+    }
+    res.sendStatus(200).json({status: 'ok'});
+});
+
 // app.delete('/delete-post', async (req: Request, res: Response) => {
 //     // const url: string = 'https://jsonplaceholder.typicode.com/posts/' + req.body.id;
 //     // console.log(url);
