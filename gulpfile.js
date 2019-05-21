@@ -49,8 +49,8 @@ gulp.task('compile', () => {
 });
 
 gulp.task('copy', () => {
-    return gulp.src('src/resources/**')
-        .pipe(gulp.dest('built/local/resources'));
+    gulp.src('src/resources/**').pipe(gulp.dest('built/local/resources'));
+    return gulp.src('src/extrawest/lesson#6_express_js/views/**').pipe(gulp.dest('built/local/extrawest/lesson#6_express_js/views/'));
 });
 
 gulp.task('jasmine', () => {
@@ -61,7 +61,7 @@ gulp.task('jasmine', () => {
 // gulp.task('all', gulp.series(['del', 'tslint', 'compile', 'jasmine']));
 
 // gulp.task('default', gulp.series(['all']));
-gulp.task('default', gulp.series(['del', 'tslint', 'compile', 'copy']));
+gulp.task('default', gulp.series(['del', 'tslint', 'copy', 'compile']));
 
 // gulp.task('default', mock => { // empty task
 //     mock();

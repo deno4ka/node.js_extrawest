@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TEST Handlebars</title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    </head>
+    <body>
+        <div class="w3-container">
+            <h2>Users</h2>
+            {{#each users}}
+                <div class="w3-panel w3-card">
+                    <p>{{user this}}</p>
+                    <p>{{company this.company}}</p>
+                    <p>{{address this.address}}</p>
+                </div>
+            {{/each}}
+        </div>
+    </body>
+</html>
