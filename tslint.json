@@ -34,7 +34,8 @@
   "exclude": [
     "src/itvdn_lessons/**",
     "src/resources/**",
-    "src/extrawest/lesson#6_express_js/views/**"
+    "src/extrawest/lesson#6_express_js/views/**",
+    "src/extrawest/lesson#7_db/views/**"
   ]
 }
 }

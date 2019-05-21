@@ -38,12 +38,6 @@ app.use(cookieParser());
 app.use(session(SESSION_PARAMS));
 app.use(flash());
 
-// const hbs: Exphbs = exphbs.create({
-//     helpers: {  // Specify helpers which are only registered on this instance.
-//         foo: () => 'FOO!',
-//         bar: () => 'BAR!'
-//     }
-// });
 app.engine('.hbs', exphbs({extname: '.hbs',
     helpers: {
         user: (u) => `User: ${u.userId}, ${u.name}, ${u.username}, ${u.email}, ${u.phone}, ${u.website}`,

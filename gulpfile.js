@@ -50,7 +50,8 @@ gulp.task('compile', () => {
 
 gulp.task('copy', () => {
     gulp.src('src/resources/**').pipe(gulp.dest('built/local/resources'));
-    return gulp.src('src/extrawest/lesson#6_express_js/views/**').pipe(gulp.dest('built/local/extrawest/lesson#6_express_js/views/'));
+    gulp.src('src/extrawest/lesson#6_express_js/views/**').pipe(gulp.dest('built/local/extrawest/lesson#6_express_js/views/'));
+    return gulp.src('src/extrawest/lesson#7_db/views/**').pipe(gulp.dest('built/local/extrawest/lesson#7_db/views/'));
 });
 
 gulp.task('jasmine', () => {

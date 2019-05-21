@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Posts</title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    </head>
+    <body>
+        <div class="w3-container">
+            <h2 style="text-align: center;">Posts</h2>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>User ID</th>
+                    <th>Title</th>
+                    <th>Message</th>
+                </tr>
+                {{#each posts}}
+                    <tr>
+                        {{{post this}}}
+                    </tr>
+                {{/each}}
+            </table>
+        </div>
+    </body>
+</html>
