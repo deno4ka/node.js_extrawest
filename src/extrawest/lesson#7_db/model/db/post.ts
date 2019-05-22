@@ -1,9 +1,8 @@
-import {Table, Column, Model, HasMany, DataType, IBuildOptions} from 'sequelize-typescript';
+import {Table, Column, Model, HasMany, DataType} from 'sequelize-typescript';
 
 import Comment from './comment';
-import {Omit, RecursivePartial} from 'sequelize-typescript/lib/utils/types';
 
-@Table( {modelName: 'post'} )
+@Table( {tableName: 'post', timestamps: false} )
 export default class Post extends Model<Post> {
 
     @Column( { field: 'id', primaryKey: true } )

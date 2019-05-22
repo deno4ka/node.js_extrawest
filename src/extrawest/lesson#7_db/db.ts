@@ -1,5 +1,5 @@
 import Post from './model/db/post';
-import {IFindOptions, Sequelize} from 'sequelize-typescript';
+import {Sequelize} from 'sequelize-typescript';
 
 const sequelize: Sequelize =  new Sequelize({
     database: 'node_js',
@@ -17,14 +17,20 @@ export default class DB {
         return await post.save();
     }
 
-    public static async getPost(postId: number): Promise<Post> {
+    public static async getPostById(postId: number): Promise<Post> {
         // return await Post.find( {where: { id: postId } }); // Doesn't work!
-        // return await Post.findById( postId ); // FUCK THEM!! With Sequelize v5, findById() was replaced by findByPk()
         return await Post.findByPk( postId );
     }
 
     public static async getPosts(): Promise<Post[]> {
-        return await Post.findAll();
+        return await Post.findAll(
+        //     {
+        //     where: {
+        //         field1: '120',
+        //         field2: undefined
+        //     }
+        // }
+        );
     }
 
     public static async updatePost(post: Post): Promise<[number, Post[]]> {

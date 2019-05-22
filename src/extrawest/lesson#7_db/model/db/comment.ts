@@ -3,7 +3,7 @@ import {Table, Column, Model, HasMany, BelongsTo, ForeignKey} from 'sequelize-ty
 import {JsonProperty} from 'json-object-mapper';
 import Post from './post';
 
-@Table( {modelName: 'comment'} )
+@Table( {tableName: 'comments', timestamps: false} )
 export default class Comment extends Model<Comment> {
 
     @Column( {field: 'id', primaryKey: true} )
