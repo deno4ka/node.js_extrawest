@@ -17,7 +17,7 @@ gulp.task('del', () => {
 });
 
 gulp.task('tslint', () => {
-    return gulp.src('src/**', '!src/itvdn_lessons/**', '!src/extrawest/')
+    return gulp.src('src/**/*.ts', '!src/itvdn_lessons/**', '!src/extrawest/')
         .pipe(tslint({
             formatter: 'verbose'
         }))
@@ -50,8 +50,7 @@ gulp.task('compile', () => {
 
 gulp.task('copy', () => {
     gulp.src('src/resources/**').pipe(gulp.dest('built/local/resources'));
-    gulp.src('src/extrawest/lesson#6_express_js/views/**').pipe(gulp.dest('built/local/extrawest/lesson#6_express_js/views/'));
-    return gulp.src('src/extrawest/lesson#7_db/views/**').pipe(gulp.dest('built/local/extrawest/lesson#7_db/views/'));
+    return gulp.src('src/extrawest/**/*.hbs').pipe(gulp.dest('built/local/extrawest/'));
 });
 
 gulp.task('jasmine', () => {

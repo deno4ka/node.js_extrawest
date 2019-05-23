@@ -22,10 +22,6 @@ CREATE TABLE `posts` (
     `body` varchar(1024) DEFAULT NULL,
     `user_id` int(11) NOT NULL,
     PRIMARY KEY (`id`)
-
-#     KEY `FK_USER_idx` (`user_id`),
-#     CONSTRAINT `FK_USER` FOREIGN KEY (`user_id`)
-#     REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `comments`;
@@ -39,7 +35,7 @@ CREATE TABLE `comments` (
 
     KEY `FK_POST_idx` (`post_id`),
     CONSTRAINT `FK_POST` FOREIGN KEY (`post_id`)
-    REFERENCES `posts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+    REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 

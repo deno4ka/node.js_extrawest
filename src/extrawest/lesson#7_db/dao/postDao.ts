@@ -20,19 +20,19 @@ export default class PostDao {
         if (postParams.title) { whereParams.title = postParams.title; }
         if (postParams.userId) { whereParams.user_id = postParams.userId; }
         if (postParams.body) { whereParams.body = { [Op.like]: '%' + postParams.body + '%' }; }
+        // const newParams: any = Object.assign({}, {
+        //     id: postParams.id,
+        //     title: postParams.title,
+        //     user_id: postParams.userId,
+        // }, {body: { [Op.like]: '%' + postParams.body + '%' }});
         return await Post.findAll(
             {
                 where: whereParams,
+                // where: newParams,
                 include: [
                     { model: Comment, required: true}
                 ]
-            // where: {
-                // id: postParams.id,
-                // title: postParams.title,
-                // user_id: postParams.userId
-                // body: { [Op.like]: '%' + postParams.body + '%' }
-            // }
-        }
+            }
         );
     }
 

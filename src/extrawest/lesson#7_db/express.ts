@@ -13,7 +13,9 @@ import Post from './model/db/post';
 import Comment from './model/db/comment';
 import PostDao from './dao/postDao';
 import CommentDao from './dao/commentDao';
+import HttpHelper from './helpers/httpHelper';
 import {Sequelize} from 'sequelize-typescript';
+import $ from 'jquery';
 
 import path from 'path';
 
@@ -25,11 +27,6 @@ const SESSION_PARAMS: any = {
     resave: false,
     saveUninitialized: true
 };
-
-// TODO:
-//  - 0. get comments
-//  + 1. get posts&searchParams
-//  - 2. get Post with Comments
 
 const sequelize: Sequelize =  new Sequelize({
     database: 'node_js',
@@ -48,7 +45,16 @@ app.use(session(SESSION_PARAMS));
 
 app.engine('.hbs', exphbs({extname: '.hbs',
     helpers: {
-        post: (p: Post) => `<td>${p.id}</td><td>${p.userId}</td><td>${p.title}</td><td>${p.body}</td>`,
+        post: (p: Post) =>
+            `<td>${p.id}</td><td>${p.userId}</td><td>${p.title}</td><td>${p.body}</td>
+<td><a href="/comments?postId=${p.id}">${p.comments.length}</a></td><td></td>
+<td><button onclick="$.ajax({
+    type: 'DELETE',
+    url: '/posts/${p.id}',
+    success: (msg) => {
+        alert('Data Deleted: ' + msg);
+    }
+});"><i class="fas fa-trash-alt"></i></button></td>`,
         comment: (c: Comment) =>
             `<td>${c.postId}</td><td>${c.id}</td><td>${c.name}</td><td>${c.email}</td><td>${c.body}</td>`,
     }}));
@@ -81,11 +87,11 @@ app.get('/posts', async (req: Request, res: Response) => {
         }
     }
     posts = await PostDao.getPosts(postParams);
-    res.send(posts);
-    // res.render('posts.hbs', {
-    //     layout: false,
-    //     posts
-    // });
+    // res.send(posts);
+    res.render('posts.hbs', {
+        layout: false,
+        posts
+    });
 });
 
 app.get('/comments', async (req: Request, res: Response) => {
