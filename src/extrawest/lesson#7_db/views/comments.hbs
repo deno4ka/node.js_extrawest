@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Comments</title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    </head>
+    <body>
+        <div class="w3-container">
+            <h2 style="text-align: center;">Comments</h2>
+            <table>
+                <tr>
+                    <th>Post ID</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Message</th>
+                </tr>
+                {{#each comments}}
+                    <tr>
+                        {{{comment this}}}
+                    </tr>
+                {{/each}}
+            </table>
+        </div>
+    </body>
+</html>

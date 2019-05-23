@@ -1,26 +1,15 @@
-import Post from './model/db/post';
-import {Sequelize} from 'sequelize-typescript';
-import PostJson from './model/json/postJson';
-import Seq from 'sequelize';
+import Post from '../model/db/post';
+import Comment from '../model/db/comment';
+import PostJson from '../model/json/postJson';
+import Seq, {Op} from 'sequelize';
 
-const sequelize: Sequelize =  new Sequelize({
-    database: 'node_js',
-    dialect: 'mysql',
-    username: 'root',
-    password: 'admin',
-    storage: ':memory:',
-    modelPaths: [__dirname + '/model/db']
-});
-
-
-export default class DB {
+export default class PostDao {
 
     public static async addPost(post: Post): Promise<Post> {
         return await post.save();
     }
 
     public static async getPostById(postId: number): Promise<Post> {
-        // return await Post.find( {where: { id: postId } }); // Doesn't work!
         return await Post.findByPk( postId );
     }
 
@@ -30,15 +19,18 @@ export default class DB {
         if (postParams.id) { whereParams.id = postParams.id; }
         if (postParams.title) { whereParams.title = postParams.title; }
         if (postParams.userId) { whereParams.user_id = postParams.userId; }
-        // if (postParams.body) { whereParams.body = {$iLike: '%' + postParams.body}; }
+        if (postParams.body) { whereParams.body = { [Op.like]: '%' + postParams.body + '%' }; }
         return await Post.findAll(
             {
-            where: whereParams
+                where: whereParams,
+                include: [
+                    { model: Comment, required: true}
+                ]
             // where: {
                 // id: postParams.id,
                 // title: postParams.title,
                 // user_id: postParams.userId
-                // body: {$iLike: '%' + postParams.body}
+                // body: { [Op.like]: '%' + postParams.body + '%' }
             // }
         }
         );

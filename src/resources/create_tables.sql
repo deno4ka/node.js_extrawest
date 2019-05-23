@@ -31,7 +31,7 @@ CREATE TABLE `posts` (
 DROP TABLE IF EXISTS `comments`;
 CREATE TABLE `comments` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
-    `name` varchar(64) DEFAULT NULL,
+    `name` varchar(128) DEFAULT NULL,
     `email` varchar(64) DEFAULT NULL,
     `body` varchar(1024) DEFAULT NULL,
     `post_id` int NOT NULL,

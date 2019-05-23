@@ -5,22 +5,22 @@ import Post from './post';
 export default class Comment extends Model<Comment> {
 
     @Column( {field: 'id', primaryKey: true, type: DataType.NUMBER } )
-    public commentId: number;
+    public id: number;
 
     @Column( {field: 'name', type: DataType.TEXT } )
-    public commentName: string;
+    public name: string;
 
     @Column( {field: 'email', type: DataType.TEXT } )
-    public commentEmail: string;
+    public email: string;
 
     @Column( {field: 'body', type: DataType.TEXT } )
-    public commentBody: string;
+    public body: string;
 
     @Column( {field: 'post_id', type: DataType.NUMBER} )
     @ForeignKey(() => Post)
     public postId: number;
 
     @BelongsTo(() => Post)
-    public user: Post;
+    public post: Post;
 
 }
