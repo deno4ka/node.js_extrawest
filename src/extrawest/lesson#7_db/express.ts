@@ -21,6 +21,10 @@ const SESSION_PARAMS: any = {
     saveUninitialized: true
 };
 
+// TODO:
+//  1. get posts&searchParams
+//  2. get Post with Comments
+
 const app: Application = express();
 app.use(bodyParser.urlencoded({extended: true})); // parse application/x-www-form-urlencoded
 app.use(bodyParser.json()); // parse application/json
@@ -40,11 +44,14 @@ app.get('/', (req: any, res: Response) => {
 });
 
 app.get('/posts', async (req: Request, res: Response) => {
-    // const data: Url = url.parse(req.url, true).query;
-    // console.log('>>> data: ', data);
+    const queryParams: Url = url.parse(req.url, true).query;
+    console.log('> queryParams: ', queryParams);
     // res.send(data);
-    const posts: Post[] = await DB.getPosts();
-    if (posts.length === 0) {
+    const postParams: PostJson = ObjectMapper.deserialize(PostJson, queryParams);
+    console.log('>> postParams: ', postParams);
+    let posts: Post[] = [];
+    const isEmpty: boolean = await DB.isEmpty();
+    if (isEmpty) {
         console.log('Getting posts from API');
         const response: string = await requestImpl.get('https://jsonplaceholder.typicode.com/posts');
         const responsePosts: PostJson[] = ObjectMapper.deserializeArray(PostJson, response);
@@ -58,6 +65,7 @@ app.get('/posts', async (req: Request, res: Response) => {
             posts.push(await DB.addPost(post));
         }
     }
+    posts = await DB.getPosts(postParams);
     res.render('posts.hbs', {
         layout: false,
         posts

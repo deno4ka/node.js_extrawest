@@ -1,34 +1,26 @@
-import {Table, Column, Model, HasMany, BelongsTo, ForeignKey} from 'sequelize-typescript';
-
-import {JsonProperty} from 'json-object-mapper';
+import {Table, Column, Model, HasMany, BelongsTo, ForeignKey, DataType} from 'sequelize-typescript';
 import Post from './post';
 
 @Table( {tableName: 'comments', timestamps: false} )
 export default class Comment extends Model<Comment> {
 
-    @Column( {field: 'id', primaryKey: true} )
-    @JsonProperty( {name: 'id'} )
+    @Column( {field: 'id', primaryKey: true, type: DataType.NUMBER } )
     public commentId: number;
 
-    @Column( {field: 'name'} )
-    @JsonProperty( {name: 'name'} )
+    @Column( {field: 'name', type: DataType.TEXT } )
     public commentName: string;
 
-    @Column( {field: 'email'} )
-    @JsonProperty( {name: 'email'} )
+    @Column( {field: 'email', type: DataType.TEXT } )
     public commentEmail: string;
 
-    @Column( {field: 'body'} )
-    @JsonProperty( {name: 'body'})
+    @Column( {field: 'body', type: DataType.TEXT } )
     public commentBody: string;
 
-    @Column( {field: 'post_id'} )
+    @Column( {field: 'post_id', type: DataType.NUMBER} )
     @ForeignKey(() => Post)
-    @JsonProperty( {name: 'postId'} )
     public postId: number;
 
     @BelongsTo(() => Post)
     public user: Post;
-
 
 }
