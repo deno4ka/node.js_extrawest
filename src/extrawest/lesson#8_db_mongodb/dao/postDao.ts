@@ -1,7 +1,6 @@
 import Post from '../model/db/post';
 import Comment from '../model/db/comment';
 import PostJson from '../model/json/postJson';
-import Seq, {Op} from 'sequelize';
 
 export default class PostDao {
 

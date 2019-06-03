@@ -18,7 +18,7 @@ import CommentDao from './dao/commentDao';
 import $ from 'jquery';
 
 import { prop, Typegoose, ModelType, InstanceType } from 'typegoose';
-import * as mongoose from 'mongoose';
+import {connect} from 'mongoose';
 
 import path from 'path';
 
@@ -46,7 +46,13 @@ const options: any = { useNewUrlParser: true };
 
 // console.log('>>> mongoose: ', mongoose);
 // mongoose.connect(mongoUrl);
-mongoose.connect(mongoUrl, options);
+
+connect(mongoUrl, options).then(() => {
+    console.log('122');
+}).catch(() => {
+    console.log('1221212');
+});
+
 // mongoose.connect(mongoUrl, options, (err) => {
 //     if (err) {
 //         throw err;
