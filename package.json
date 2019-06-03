@@ -17,6 +17,7 @@
     "@types/jasmine": "3.3.12",
     "@types/nock": "9.3.1",
     "@types/node": "11.13.2",
+    "@types/mongoose": "5.5.3",
     "del": "4.1.0",
     "gulp": "4.0.0",
     "gulp-babel": "8.0.0",
@@ -43,6 +44,7 @@
     "jquery": "3.4.1",
     "json-object-mapper": "1.6.0",
     "mongodb": "3.2.3",
+    "mongoose": "5.5.12",
     "mysql2": "1.6.5",
     "reflect-metadata": "0.1.13",
     "request": "2.88.0",
@@ -50,6 +52,7 @@
     "sequelize": "5.8.6",
     "sequelize-fixtures": "0.10.0",
     "sequelize-typescript": "1.0.0-alpha.9",
+    "typegoose": "5.6.0",
     "winston": "3.2.1"
   },
   "nyc": {
