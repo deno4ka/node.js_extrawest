@@ -1,4 +1,3 @@
-// import {Table, Column, Model, HasMany, BelongsTo, ForeignKey, DataType} from 'sequelize-typescript';
 import { prop, Typegoose, ModelType, InstanceType, Ref } from 'typegoose';
 
 import Post from './post';
