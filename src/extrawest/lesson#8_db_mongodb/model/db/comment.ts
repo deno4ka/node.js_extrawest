@@ -27,7 +27,7 @@ export default class Comment extends Typegoose {
     public postId?: number;
 
     // @BelongsTo(() => Post)
-    // @prop({ ref: Post })
-    // public post: Ref<Post>;
+    @prop({ ref: Post })
+    public post: Ref<Post>;
 
 }

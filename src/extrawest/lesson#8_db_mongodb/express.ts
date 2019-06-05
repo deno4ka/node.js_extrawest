@@ -143,7 +143,7 @@ app.post('/posts', async (req: Request, res: Response) => {
     };
     if (req.body.id) { post.id = req.body.id; }
     await PostDao.addPost(post);
-    res.sendStatus(200).json({status: 'ok'});
+    res.status(200).json({status: 'ok'});
     console.log('post added!');
 });
 
@@ -163,12 +163,19 @@ app.post('/posts', async (req: Request, res: Response) => {
 //         await PostDao.updatePost(post);
 //         console.log('post updated!');
 //     }
-//     res.sendStatus(200).json({status: 'ok'});
+//     res.status(200).json({status: 'ok'});
 // });
 
-app.delete('/posts/:postId', async (req: Request, res: Response) => {
-    await PostDao.deletePost(req.params.postId);
-    res.sendStatus(200).json({status: 'ok'});
+app.delete('/posts', async (req: Request, res: Response) => {
+    // console.log('req.body: ', req.body);
+    // console.log('req.body.data: ', req.body.data);
+    let postParams: PostJson = new PostJson();
+    if (req.body.data) {
+        postParams = ObjectMapper.deserialize(PostJson, req.body.data);
+    }
+    console.log('delete postParams: ', postParams);
+    await PostDao.deletePost(postParams);
+    res.status(200).json({status: 'ok'});
 });
 
 app.get('/comments', async (req: Request, res: Response) => {
@@ -220,7 +227,7 @@ app.post('/comments', async (req: Request, res: Response) => {
     };
     if (req.body.id) { comment.id = req.body.id; }
     await CommentDao.addComment(comment);
-    res.sendStatus(200).json({status: 'ok'});
+    res.status(200).json({status: 'ok'});
     console.log('comment added!');
 });
 

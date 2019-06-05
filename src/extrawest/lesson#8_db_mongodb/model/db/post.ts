@@ -22,7 +22,7 @@ export default class Post extends Typegoose {
     public userId?: number;
 
     // @HasMany(() => Comment)
-    // @arrayProp({ itemsRef: Comment })
-    // public comments?: Array<Ref<Comment>>;
+    @arrayProp({ itemsRef: Comment })
+    public comments?: Array<Ref<Comment>>;
 
 }

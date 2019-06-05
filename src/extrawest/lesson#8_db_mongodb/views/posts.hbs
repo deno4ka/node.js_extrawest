@@ -9,7 +9,29 @@
     </head>
     <body>
         <div class="w3-container">
-            <h2 style="text-align: center;">Posts</h2>
+            <h2 style="text-align: center;">
+                <span>
+                    <button onclick="$.ajax({
+                        type: 'GET',
+                        url: '/posts?',
+                        success: (msg) => {
+                            // alert('All post are deleted');
+                        }});">
+                    Delete all posts
+                    </button>
+                </span>
+                Posts
+                <span>
+                    <button onclick="$.ajax({
+                        type: 'DELETE',
+                        url: '/posts',
+                        success: (msg) => {
+                            alert('All post are deleted');
+                        }});">
+                    Delete all posts
+                    </button>
+                </span>
+            </h2>
             <table>
                 <tr>
                     <th>ID</th>
