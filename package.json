@@ -33,6 +33,7 @@
     "typescript": "3.4.2"
   },
   "dependencies": {
+    "@types/redis": "2.8.13",
     "body-parser": "1.18.3",
     "connect-flash": "0.1.1",
     "cookie-parser": "1.4.4",
@@ -46,6 +47,7 @@
     "mongodb": "3.2.3",
     "mongoose": "5.5.12",
     "mysql2": "1.6.5",
+    "redis": "2.8.0",
     "reflect-metadata": "0.1.13",
     "request": "2.88.0",
     "request-promise-native": "1.0.7",

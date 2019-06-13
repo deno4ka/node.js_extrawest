@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Posts</title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" crossorigin="anonymous"
+              integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    </head>
+    <body>
+        <div class="w3-container">
+            <h2 style="text-align: center;">
+                <span>
+                    <button onclick="$.ajax({
+                        type: 'GET',
+                        url: '/posts?',
+                        success: (msg) => {
+                            // alert('All post are deleted');
+                        }});">
+                    Delete all posts
+                    </button>
+                </span>
+                Posts
+                <span>
+                    <button onclick="$.ajax({
+                        type: 'DELETE',
+                        url: '/posts',
+                        success: (msg) => {
+                            alert('All post are deleted');
+                        }});">
+                    Delete all posts
+                    </button>
+                </span>
+            </h2>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>User ID</th>
+                    <th>Title</th>
+                    <th>Message</th>
+                    <th>Comments</th>
+                    <th>Actions</th>
+                </tr>
+                {{#each posts}}
+                    <tr>
+                        {{{post this}}}
+                    </tr>
+                {{/each}}
+            </table>
+        </div>
+    </body>
+</html>
