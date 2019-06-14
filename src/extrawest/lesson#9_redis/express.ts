@@ -62,35 +62,32 @@ app.engine('.hbs', exphbs({
 app.set('view engine', '.hbs');
 
 app.get('/', (req: any, res: Response) => {
-    client.hmset('user_1', {id: '1', firstName: 'Ivan', lastName: 'Ivanov'});
-    client.hmset('user_2', {id: '2', firstName: 'Alex', home: 'Petrenko'});
-    client.scan('user_*');
-    // client.hset('hosts', {mjr: '1', another: '12', home: '1234'}, '1');
-    // client.hset('hosts', {mjr: '2', another: '23', home: '2345'}, '2');
-    // const userRahul: any = {
-    //     mjr: '1', another: '12', home: '1234'
-    // };
-    // const userNamita: any = {
-    //     mjr: '2', another: '23', home: '2345'
-    // };
-    // client.hset('users', userRahul, '1');
-    // client.hset('users', userNamita, '2');
-    // client.hmset('users_1', {id: '1', firstName: 'Ivan', lastName: 'Ivanov'});
-    // client.hmset('users_2', {id: '2', firstName: 'Alex', home: 'Petrenko'});
-    // client.hgetall('users', (err, obj) => {
+    // client.hmset('tmp', {id: '1', firstName: 'Ivan', lastName: 'Ivanov'});
+    // client.hset('users', 'id', '1');
+    // client.hset('users', 'id', '2');
+    // client.hset('users', 'id', '3');
+    // client.hgetall('tmp', (err, obj) => {
     //     console.dir(obj);
     //     res.send(obj);
     // });
-    // const post1: Post = new Post();
-    // client.sadd('users', post1);
-
-    // client.hset('frameworks', 'javascript', 'AngularJS', redis.print);
-    // client.hset('frameworks', 'css', 'Bootstrap', redis.print);
-    // client.hset('frameworks', 'node', 'Express', redis.print);
-    // client.hgetall('frameworks', (err, result) => {
-    //     console.log(JSON.stringify(result));
-    //     res.send(result);
-    // });
+    // client.multi()
+    //     .hset('users', 'id', '1')
+    //     .hset('users', 'id', '2')
+    //     .hset('users', 'id', '3')
+        // .scard('users')
+        // .smembers('users')
+        // .keys('*', (err, replies) => {
+        //     // NOTE: code in this callback is NOT atomic
+        //     // this only happens after the the .exec call finishes.
+        //     client.mget(replies, redis.print);
+        // })
+        // .dbsize()
+        // .exec((err, replies) => {
+        //     console.log('MULTI got ' + replies.length + ' replies');
+        //     replies.forEach((reply, index) => {
+        //         console.log('Reply ' + index + ': ' + reply.toString());
+        //     });
+        // });
 });
 
 // app.get('/posts', async (req: Request, res: Response) => {
@@ -126,35 +123,44 @@ app.get('/', (req: any, res: Response) => {
 //         posts
 //     });
 // });
-//
-// app.get('/posts/:postId', async (req: Request, res: Response) => {
-//     const postId: number = req.params.postId;
-//     console.log('> postId: ' + postId);
-//     const post: Post = await PostDao.getPostById(postId);
-//     if (null === post) {
-//         console.log(`Getting posts with id=${postId} from API`);
-//         try {
-//             const response: string = await requestImpl.get(`${API_URL}posts/${postId}`);
-//             const responsePost: PostJson = ObjectMapper.deserialize(PostJson, response);
-//             const newPost: any = {
-//                 id: responsePost.id,
-//                 title: responsePost.title,
-//                 body: responsePost.body,
-//                 userId: responsePost.userId
-//             };
-//             await PostDao.addPost(newPost);
-//         } catch (error) {
-//             console.log('Server error: ', error);
-//             res.send('Post not found!');
-//         }
-//     }
-//     const posts: Post[] = [];
-//     posts.push(post);
-//     res.render('posts', {
-//         layout: false,
-//         posts
-//     });
-// });
+
+app.get('/posts/:postId', async (req: Request, res: Response) => {
+    const postId: number = req.params.postId;
+    console.log('> postId: ' + postId);
+    // const post: Post = await PostDao.getPostById(postId);
+    client.hmget('post' + postId, async (post) => {
+        if (null === post) {
+            console.log(`Getting posts with id=${postId} from API`);
+            try {
+                const response: string = await requestImpl.get(`${API_URL}posts/${postId}`);
+                const responsePost: PostJson = ObjectMapper.deserialize(PostJson, response);
+                const newPost: any = {
+                    id: responsePost.id,
+                    title: responsePost.title,
+                    body: responsePost.body,
+                    userId: responsePost.userId
+                };
+                await PostDao.addPost(newPost);
+            } catch (error) {
+                console.log('Server error: ', error);
+                res.send('Post not found!');
+            }
+        }
+        const postJson: PostJson = ObjectMapper.deserialize(PostJson, post);
+        const requestedPost: any = {
+            id: postJson.id,
+            title: postJson.title,
+            body: postJson.body,
+            userId: postJson.userId
+        };
+        const posts: Post[] = [];
+        posts.push(requestedPost);
+        res.render('posts', {
+            layout: false,
+            posts
+        });
+    });
+});
 //
 // app.post('/posts', async (req: Request, res: Response) => {
 //     console.log('adding new post');
