@@ -1,4 +1,4 @@
-import express, {Request, Response, Application} from 'express';
+import express, { Request, Response, Application } from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
@@ -100,6 +100,13 @@ app.get('/', (req: any, res: Response) => {
 //     const isEmpty: boolean = await PostDao.isEmpty();
 //     if (isEmpty) {
 //         console.log('Posts are empty!');
+//     console.log('> queryParams: ', queryParams);
+//     // res.send(data);
+//     const postParams: PostJson = ObjectMapper.deserialize(PostJson, queryParams);
+//     console.log('>> postParams: ', postParams);
+//     let posts: Post[] = [];
+//     const isEmpty: boolean = await PostDao.isEmpty();
+//     if (isEmpty) {
 //         console.log('Getting posts from API');
 //         const response: string = await requestImpl.get(API_URL + 'posts');
 //         const responsePosts: PostJson[] = ObjectMapper.deserializeArray(PostJson, response);
@@ -218,32 +225,17 @@ app.get('/posts/:postId', async (req: Request, res: Response) => {
 //         console.log('Getting comments from API');
 //         const response: string = await requestImpl.get(API_URL + 'comments');
 //         const responseComments: CommentJson[] = ObjectMapper.deserializeArray(CommentJson, response);
-//         // console.log('>>> responseComments: ', responseComments);
-//         // console.log('Saving comment from API to DB');
+//         console.log('>>> responseComments: ', responseComments);
+//         console.log('Saving comment from API to DB');
 //         for (const responseComment of responseComments) { // add responseComments to DB
-//             // const comment: Comment = new Comment();
-//             // comment.name = responseComment.name;
-//             // comment.email = responseComment.email;
-//             // comment.body = responseComment.body;
-//             // comment.postId = responseComment.postId;
-//             const comment: any = {
-//                 id: responseComment.id,
-//                 name: responseComment.name,
-//                 email: responseComment.email,
-//                 body: responseComment.body,
-//                 postId: responseComment.postId
-//             };
+//             const comment: Comment = new Comment();
+//             comment.name = responseComment.name;
+//             comment.email = responseComment.email;
+//             comment.body = responseComment.body;
+//             comment.postId = responseComment.postId;
 //             console.log('>>>. comment to add: ', comment);
-//             await CommentDao.addComment(comment);
-//         }
-//     }
-//     comments = await CommentDao.getComments(commentParams);
-//     // res.send(comments);
-//     res.render('comments.hbs', {
-//         layout: false,
-//         comments
-//     });
-// });
+//             comments.push(await CommentDao.addComment(comment));
+
 //
 // app.post('/comments', async (req: Request, res: Response) => {
 //     console.log('adding new comment');
@@ -257,6 +249,68 @@ app.get('/posts/:postId', async (req: Request, res: Response) => {
 //     await CommentDao.addComment(comment);
 //     res.status(200).json({status: 'ok'});
 //     console.log('comment added!');
+
+// app.get('/posts/:postId', async (req: Request, res: Response) => {
+//     const postId: number = req.params.postId;
+//     console.log('> postId: ' + postId);
+//     let post: Post = await PostDao.getPostById(postId);
+//     if (null === post) {
+//         console.log(`Getting posts with id=${postId} from API`);
+//         try {
+//             const response: string = await requestImpl.get(`${API_URL}posts/${postId}`);
+//             const responsePost: PostJson = ObjectMapper.deserialize(PostJson, response);
+//             post = new Post();
+//             post.id = postId;
+//             post.title = responsePost.title;
+//             post.body = responsePost.body;
+//             post.userId = responsePost.userId;
+//             post = await PostDao.addPost(post);
+//         } catch (error) {
+//             console.log('Server error: ', error);
+//             res.send('Post not found!');
+//         }
+//     }
+//     const posts: Post[] = [];
+//     posts.push(post);
+//     res.render('posts', {
+//         layout: false,
+//         posts
+//     });
+// });
+
+// app.post('/posts', async (req: Request, res: Response) => {
+//     console.log('adding new post');
+//     const post: Post = new Post();
+//     post.title = req.body.title;
+//     post.body = req.body.body;
+//     post.userId = req.body.userId;
+//     await PostDao.addPost(post);
+//     res.sendStatus(200).json({status: 'ok'});
+//     console.log('post added!');
+// });
+
+// app.put('/posts', async (req: Request, res: Response) => {
+//     const existingPost: Post = await PostDao.getPostById(req.body.id);
+//     const post: Post = existingPost ? existingPost : new Post();
+//     if (null === existingPost) {
+//         post.id = req.body.id;
+//         post.title = req.body.title;
+//         post.body = req.body.body;
+//         post.userId = req.body.userId;
+//         console.log('adding new post');
+//         await PostDao.addPost(post);
+//         console.log('post added!');
+//     } else {
+//         console.log('updating old post');
+//         await PostDao.updatePost(post);
+//         console.log('post updated!');
+//     }
+//     res.sendStatus(200).json({status: 'ok'});
+// });
+
+// app.delete('/posts/:postId', async (req: Request, res: Response) => {
+//     await PostDao.deletePost(req.params.postId);
+//     res.sendStatus(200).json({status: 'ok'});
 // });
 
 app.listen(PORT);
