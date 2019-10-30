@@ -51,7 +51,7 @@
     "reflect-metadata": "0.1.13",
     "request": "2.88.0",
     "request-promise-native": "1.0.7",
-    "sequelize": "5.8.6",
+    "sequelize": "5.15.1",
     "sequelize-fixtures": "0.10.0",
     "sequelize-typescript": "1.0.0-alpha.9",
     "typegoose": "5.6.0",
