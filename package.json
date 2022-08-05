@@ -45,7 +45,7 @@
     "jquery": "3.4.1",
     "json-object-mapper": "1.6.0",
     "mongodb": "3.2.3",
-    "mongoose": "5.5.12",
+    "mongoose": "5.7.5",
     "mysql2": "1.6.5",
     "redis": "2.8.0",
     "reflect-metadata": "0.1.13",
